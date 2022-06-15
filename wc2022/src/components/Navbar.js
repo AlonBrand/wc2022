@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
+import { IconContext } from "react-icons";
 import * as FaIcons from "react-icons/fa";
+import * as FiIcons from "react-icons/fi";
 import * as AiIcons from "react-icons/ai";
 import "./Navbar.css";
-import { IconContext } from "react-icons";
+
+
 
 function Navbar() {
+    const [isConnected, setIsConnected] = useState(false);
     const [sidebar, setSideBar] = useState(false);
 
     const showSideBar = () => {
         setSideBar(!sidebar);
+    };
+
+    const changeIsConnected = () => {
+        setIsConnected(!isConnected)
     };
 
     return (
@@ -19,6 +27,13 @@ function Navbar() {
                 <div className="navbar">
                     <Link to="#" className="menu-bars">
                         <FaIcons.FaBars onClick={showSideBar} />
+                    </Link>
+                    <Link to="#" className="menu-bars login" onClick={changeIsConnected}> 
+                        {
+                            isConnected ?
+                            <FiIcons.FiUserCheck /> :
+                            <FiIcons.FiUserX />
+                        }
                     </Link>
                 </div>
                 <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
@@ -39,7 +54,8 @@ function Navbar() {
                                         </Link>
                                     </li>
                                 );
-                            })}
+                            })
+                        }
                     </ul>
                 </nav>
             </IconContext.Provider>

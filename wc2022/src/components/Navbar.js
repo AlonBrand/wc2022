@@ -21,6 +21,14 @@ function Navbar() {
         setIsConnected(!isConnected)
     };
 
+    const handleConnect = () => {
+        console.log("Trying to connect...");
+    };
+    
+    const handleDisconnect = () => {
+        console.log("Trying to Disconnect...");
+    };
+
     return (
         <>
             <IconContext.Provider value={{ color: "#fff" }}>
@@ -31,8 +39,8 @@ function Navbar() {
                     <Link to="#" className="menu-bars login" onClick={changeIsConnected}> 
                         {
                             isConnected ?
-                            <FiIcons.FiUserCheck /> :
-                            <FiIcons.FiUserX />
+                            <FiIcons.FiUserCheck onClick={handleDisconnect}/> :
+                            <FiIcons.FiUserX onClick={handleConnect}/>
                         }
                     </Link>
                 </div>

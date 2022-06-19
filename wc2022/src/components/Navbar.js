@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
-import Modal from "react-modal";
+import LoginModal from "./LoginModal";
 import * as FaIcons from "react-icons/fa";
 import * as FiIcons from "react-icons/fi";
 import * as AiIcons from "react-icons/ai";
@@ -34,37 +34,20 @@ function Navbar() {
         setModalIsOpen(false);
     }
 
-    const customStyles = {
-        content: {
-            top: "50%",
-            left: "50%",
-            right: "auto",
-            bottom: "auto",
-            marginRight: "-50%",
-            transform: "translate(-50%, -50%)",
-        },
-    };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const nickName = event.target.nName.value;
+        const email = event.target.email.value;
+        closeModal();
+    }
 
     return (
         <>
-            <Modal
-                isOpen={modalIsOpen}
-                // onAfterOpen={afterOpenModal}
-                // onRequestClose={closeModal}
-                style={customStyles}
-                contentLabel="Example Modal"
-            >
-                {/* <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2> */}
-                <button onClick={closeModal}>close</button>
-                <div>I am a modal</div>
-                <form>
-                    <input />
-                    <button>tab navigation</button>
-                    <button>stays</button>
-                    <button>inside</button>
-                    <button>the modal</button>
-                </form>
-            </Modal>
+            <LoginModal 
+                modalIsOpen={modalIsOpen}
+                closeModal={closeModal}
+                handleSubmit={handleSubmit}
+            />
             <IconContext.Provider value={{ color: "#fff" }}>
                 <div className="navbar">
                     <Link to="#" className="menu-bars">

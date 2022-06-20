@@ -36,8 +36,6 @@ function Navbar() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const nickName = event.target.nName.value;
-        const email = event.target.email.value;
         closeModal();
     }
 

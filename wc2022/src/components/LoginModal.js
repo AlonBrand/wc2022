@@ -19,7 +19,6 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
 
     return(
         <Modal
-            className={"modal"}
             isOpen={modalIsOpen}
             // onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}

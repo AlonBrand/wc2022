@@ -8,6 +8,8 @@ import * as FiIcons from "react-icons/fi";
 import * as AiIcons from "react-icons/ai";
 import "./Navbar.css";
 
+import { postLogin } from "../utils/postLogin";
+
 function Navbar() {
     const [isConnected, setIsConnected] = useState(false);
     const [sidebar, setSideBar] = useState(false);
@@ -34,8 +36,13 @@ function Navbar() {
         setModalIsOpen(false);
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(event.target)
+        postLogin({
+            nickName: event.target.nName.value,
+            email: event.target.email.value
+        })
         closeModal();
     }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from "react-modal";
 
 export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
+    console.log(handleSubmit)
 
     const customStyles = {
         content: {

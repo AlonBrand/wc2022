@@ -2,8 +2,6 @@ import React from 'react';
 import Modal from "react-modal";
 
 export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
-    console.log(handleSubmit)
-
     const customStyles = {
         content: {
             position: "absolute",   
@@ -14,9 +12,20 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
             marginRight: "-50%",
             transform: "translate(-50%, -50%)",
             borderStyle: "double",
-            padding: "7px 7px 7px 7px"
+            padding: "7px 7px 7px 7px",
+            border: "1px"
         },
     };
+
+    const inputStyle = {
+        border: "1px solid black",
+        marginBottom: "10px"
+    }
+    
+    const submitStyle = {
+        height: "50px",
+        width: "100px",
+    }
 
     return(
         <Modal
@@ -27,13 +36,15 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
             ariaHideApp={false}
         >
             <div className="modal-wrapper">
-                <button onClick={closeModal}>close</button>
+                {/* <button onClick={closeModal}>close</button> */}
                 <form onSubmit={handleSubmit}>
                     <label htmlFor={"nName"}>Nick name</label><br/>
-                    <input type={"text"} name={"nName"}/><br/>
+                    <input style={inputStyle} type={"text"} name={"nName"}/><br/>
                     <label htmlFor={"email"}>Email</label><br/>
-                    <input type={"email"} name={"email"}/><br/>
-                    <input type={"submit"} value={"Register"}/>
+                    <input style={inputStyle} type={"email"} name={"email"}/><br/>
+                    <div className='submitWrapper'>
+                        <input style={submitStyle} type={"submit"} value={"Register"}/>
+                    </div>
                 </form>
             </div>
         </Modal>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
@@ -14,6 +14,7 @@ function Navbar() {
     const [isConnected, setIsConnected] = useState(false);
     const [sidebar, setSideBar] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(true);
+    const [userName, setUserName] = useState("")
 
     const showSideBar = () => {
         setSideBar(!sidebar);
@@ -38,10 +39,10 @@ function Navbar() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(event.target)
         postLogin({
             nickName: event.target.nName.value,
-            email: event.target.email.value
+            email: event.target.email.value,
+            updateConnectedUserName: setUserName
         })
         closeModal();
     }
@@ -60,7 +61,7 @@ function Navbar() {
                     </Link>
                     <Link to="#" className="menu-bars login" onClick={changeIsConnected}>
                         {isConnected ? (
-                            <FiIcons.FiUserCheck onClick={handleDisconnect} />
+                            <span>{userName}</span>
                         ) : (
                             <FiIcons.FiUserX onClick={handleConnect} />
                         )}

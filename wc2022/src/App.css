@@ -17,3 +17,21 @@
   font-size: 1rem;
   text-align: center;
 }
+
+.pageTitle {
+  padding-top: 50px;
+  text-align: center;
+}
+
+.table-games {
+  border: 1px black solid;
+}
+
+.table-row-games {
+  border: 1px black solid;
+}
+
+.table-row-cell {
+  border: 1px black solid;
+  padding: 4px;
+}

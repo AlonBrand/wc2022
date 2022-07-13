@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, jsonify
+from flask import Flask, request, render_template
 
 app = Flask(__name__, static_folder="./wc2022/build/static", template_folder="./wc2022/build")
 

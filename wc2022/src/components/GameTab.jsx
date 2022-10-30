@@ -5,13 +5,22 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
 
-    const betOnGame = ({ teamA, teamB}) => {
-        // const scoreA = document.getElementById("left-bet")?.value;
-        // const scoreB = document.getElementById("right-bet")?.value;
-        console.log(teamA)
-        console.log(teamB)
-        console.log(scoreA)
-        console.log(scoreB)
+    const betOnGame = async () => {
+        let msg = "Server received your bet, good luck!!!"
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB }),
+        };
+        try {
+            let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);
+            let response_data = response.json()
+            .then((data) => console.log(data));
+            // updateConnectedUserName(`Hi, ${response_data?.msg}`)
+        } catch (e) {
+            msg = "Faild to send bet, please try again"
+        }
+        document.getElementById("response-placeholder").innerText = msg;
     }
     
     const validateInput = () => {
@@ -31,7 +40,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
 
             }
             <br></br>
-            <form onSubmit={(e) => {e.preventDefault(); betOnGame({teamA, teamB})}}>
+            <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
                 <div className="bet-line">
                     <input id="left-bet" type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
                     <input id="right-bet" type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
@@ -39,6 +48,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                 <br></br>
                 <input id="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
             </form>
+            <div id={"response-placeholder"}></div>
         </div>
     )
 }

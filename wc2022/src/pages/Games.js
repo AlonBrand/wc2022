@@ -38,7 +38,7 @@ function Games() {
         {
           dummyData && dummyData.map((game) => {
             return(
-              <GameTab id={game.id} teamA={game.teamA} teamB={game.teamB} date={game.date} info={game.info}/>
+              <GameTab key={game.id} id={game.id} teamA={game.teamA} teamB={game.teamB} date={game.date} info={game.info}/>
             )
           })
         }

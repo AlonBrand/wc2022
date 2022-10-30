@@ -1,11 +1,13 @@
 import React from 'react';
 import "../App.css";
+import { GameTab } from '../components/GameTab';
 
 function Games() {
   const dummyData = [
     {
       id: 1,
-      teams: "Argentina - Usa",
+      teamA: "Argentina",
+      teamB: "Usa",
       date: Date(),
       info: "Test Info1"
     },
@@ -31,28 +33,26 @@ function Games() {
 
   const getGamesContent = () => {
     return (
-      <table className='table-games'>
-        <tbody> 
-          <tr className='table-row-games'>
-            <th className='table-row-cell'>Game</th>
-            <th className='table-row-cell'>Teams</th>
-            <th className='table-row-cell'>Date</th>
-            <th className='table-row-cell'>Information</th>
-          </tr>
+      <>
         {
           dummyData && dummyData.map((game) => {
             return(
-              <tr className='table-row-games' key={game.id}>
-                <td className='table-row-cell'>{game.id}</td>
-                <td className='table-row-cell'>{game.teams}</td>
-                <td className='table-row-cell'>{game.date}</td>
-                <td className='table-row-cell'>{game.info}</td>
-              </tr>
+              <GameTab id={game.id} teamA={game.teamA} teamB={game.teamB} date={game.date} info={game.info}/>
             )
           })
         }
-        </tbody>
-      </table>
+      </>
+      // <table className='table-games'>
+      //   <tbody> 
+      //     <tr className='table-row-games'>
+      //       <th className='table-row-cell'>Game</th>
+      //       <th className='table-row-cell'>Teams</th>
+      //       <th className='table-row-cell'>Date</th>
+      //       <th className='table-row-cell'>Information</th>
+      //     </tr>
+      //   
+      //   </tbody>
+      // </table>
     )
   }
 

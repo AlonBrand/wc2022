@@ -2,5 +2,21 @@
     padding: 50px;
     border: 1px solid black;
     display: block;
-    margin: 50px 200px 50px 200px;
+    margin: 50px auto 50px auto;
+    background-color: #f4f8fc;
+    border-radius: 9px;
+}
+
+.bet-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#left-bet {
+    margin-right: 10px;
+}
+
+#bet-button {
+    padding: 10px 30px 10px 30px;
 }

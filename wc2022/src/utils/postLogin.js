@@ -1,4 +1,5 @@
 export const postLogin = async ({ nickName, email, updateConnectedUserName }) => {
+    let msg = ""
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -6,10 +7,11 @@ export const postLogin = async ({ nickName, email, updateConnectedUserName }) =>
     };
     try {
         let response = await fetch("http://127.0.0.1:5000/log-in", requestOptions);
-        let response_data = response.json()
-        .then((data) => data);
-        updateConnectedUserName(`Hi, ${response_data?.userName}`)
+        response.json()
+            .then((data) => {
+                updateConnectedUserName(`Hi, ${data?.userName}`)
+            });
     } catch (e) {
-        console.log("🚀 ~ file: postLogin.js ~ line 12 ~ postLogin ~ e", e);   
+        console.log("🚀 ~ file: postLogin.js ~ line 12 ~ postLogin ~ e", e);
     }
 };

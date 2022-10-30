@@ -19,15 +19,15 @@ function Home() {
     'X-RapidAPI-Host': 'livescore6.p.rapidapi.com'
   }
 
-  useEffect(() => {
-    if(liveScores === undefined) {
-      fetch('https://livescore6.p.rapidapi.com/matches/v2/list-live', { headers })
-        .then((response) => response.json())
-        .then((data) => setLiveScores(data));
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(liveScores === undefined) {
+  //     fetch('https://livescore6.p.rapidapi.com/matches/v2/list-live', { headers })
+  //       .then((response) => response.json())
+  //       .then((data) => setLiveScores(data));
+  //   }
+  // }, [])
 
-  console.log(liveScores)
+  // console.log(liveScores)
   
 
 

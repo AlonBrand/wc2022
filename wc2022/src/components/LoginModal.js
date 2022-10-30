@@ -43,9 +43,11 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
                     <label htmlFor={"email"}>Email</label><br/>
                     <input style={inputStyle} type={"email"} name={"email"}/><br/>
                     <div className='submitWrapper'>
-                        <input style={submitStyle} type={"submit"} value={"Register"}/>
+                        <input style={submitStyle} type={"submit"} value={"Sign up"}/>
+                        <input style={submitStyle} type={"submit"} value={"Sign in"}/>
                     </div>
                 </form>
+                <div id={"login-placeHolder"}></div>
             </div>
         </Modal>
     )

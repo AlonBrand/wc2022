@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, session
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__, static_folder="./wc2022/build/static", template_folder="./wc2022/build")
@@ -20,9 +20,10 @@ def login_func():
 
 @app.route('/games/bet-on-game', methods=['GET', 'POST'])
 def bet_on_game():
-    print("aaa")
     print(request.get_json()['teamA'])
-    # userName = request.get_json()
+    print(request.get_json()['teamB'])
+    print(request.get_json()['scoreA'])
+    print(request.get_json()['scoreB'])
     return {
         'msg': 'Good Luck!!!'
     }

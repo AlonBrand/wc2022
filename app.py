@@ -1,6 +1,8 @@
 import os
 from flask import Flask, request, render_template, session
 from flask_cors import CORS, cross_origin
+from openpyxl import load_workbook
+from utils.file_manager import *
 
 app = Flask(__name__, static_folder="./wc2022/build/static", template_folder="./wc2022/build")
 cors = CORS(app)
@@ -10,12 +12,17 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 def home():
     return render_template('index.html')
 
-@app.route('/log-in', methods=['GET', 'POST'])
-def login_func(): 
-    print(request.get_json()['userName'])
-    # userName = request.get_json()
+@app.route('/sign-up', methods=['GET', 'POST'])
+def sign_up_func():
+    user_name = request.get_json()['name']
+    password = request.get_json()['password']
+    return_msg = "{user_name} singed up!".format(user_name=user_name)
+    if insert_row("users", [user_name, password]) == False:
+        return_msg = "{user_name} Failed to singed up!".format(user_name=user_name)
+    
     return {
-        'userName': request.get_json()['userName']
+        'user_name': user_name,
+        'msg': return_msg
     }
 
 @app.route('/games/bet-on-game', methods=['GET', 'POST'])

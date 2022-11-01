@@ -79,3 +79,12 @@ span {
 .submitWrapper {
   text-align: center;
 }
+
+.user-name-bar {
+  color: white;
+}
+
+a:link {
+  text-decoration: none;
+}
+

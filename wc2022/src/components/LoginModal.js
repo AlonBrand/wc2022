@@ -38,13 +38,13 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
             <div className="modal-wrapper">
                 {/* <button onClick={closeModal}>close</button> */}
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor={"nName"}>Nick name</label><br/>
-                    <input style={inputStyle} type={"text"} name={"nName"}/><br/>
-                    <label htmlFor={"email"}>Email</label><br/>
-                    <input style={inputStyle} type={"email"} name={"email"}/><br/>
+                    <label htmlFor={"name"}>User name</label><br/>
+                    <input id={"name"} style={inputStyle} type={"text"} name={"name"}/><br/>
+                    <label htmlFor={"passord"}>Password</label><br/>
+                    <input id={"password"} style={inputStyle} type={"passowrd"} name={"passowrd"}/><br/>
                     <div className='submitWrapper'>
                         <input style={submitStyle} type={"submit"} value={"Sign up"}/>
-                        <input style={submitStyle} type={"submit"} value={"Sign in"}/>
+                        {/* <input style={submitStyle} type={"submit"} value={"Sign in"}/> */}
                     </div>
                 </form>
                 <div id={"login-placeHolder"}></div>

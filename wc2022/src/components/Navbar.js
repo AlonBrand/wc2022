@@ -40,8 +40,8 @@ function Navbar() {
     const handleSubmit = (event) => {
         event.preventDefault();
         postLogin({
-            nickName: event.target.nName.value,
-            email: event.target.email.value,
+            name: event.target.name.value,
+            password: event.target.password.value,
             updateConnectedUserName: setUserName
         })
         closeModal();
@@ -61,7 +61,7 @@ function Navbar() {
                     </Link>
                     <Link to="#" className="menu-bars login" onClick={changeIsConnected}>
                         {isConnected ? (
-                            <span>{userName}</span>
+                            <span className="user-name-bar">{userName}</span>
                         ) : (
                             <FiIcons.FiUserX onClick={handleConnect} />
                         )}

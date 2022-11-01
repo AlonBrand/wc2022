@@ -26,35 +26,6 @@ def get_table(file_name):
 
     return games
 
-
-    # read_file  = pd.read_excel("files/{file_name}.xlsx".format(file_name=file_name))
-    # read_file.to_csv ("files/{file_name}.xlsx".format(file_name=file_name),index = None,header=True) 
-    # # enter code here
-    # df = pd.DataFrame(pd.read_csv("files/{file_name}.xlsx".format(file_name=file_name))) 
-    # print(df)
-
-    # for entry, data_boundary in ws.tables.items():
-    #     # parse the data within the ref boundary
-    #     data = ws[data_boundary]
-        
-    #     ### extract the data ###
-    #     # the inner list comprehension gets the values for each cell in the table
-    #     content = [[cell.value for cell in ent] 
-    #             for ent in data]
-        
-    #     header = content[0]
-        
-    #     #the contents ... excluding the header
-    #     rest = content[1:]
-        
-    #     #create dataframe with the column names
-    #     #and pair table name with dataframe
-    #     df = pd.DataFrame(rest, columns = header)
-    #     mapping[entry] = df
-    
-    # print(mapping)
-
-
 def search_in_table(file_name, user_name, user_password):
     wb = load_workbook("files/{file_name}.xlsx".format(file_name=file_name))
     ws = wb.worksheets[0]

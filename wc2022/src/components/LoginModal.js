@@ -12,7 +12,7 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit, title
             marginRight: "-50%",
             transform: "translate(-50%, -50%)",
             borderStyle: "double",
-            padding: "7px 7px 7px 7px",
+            padding: "25px",
             border: "1px"
         },
     };

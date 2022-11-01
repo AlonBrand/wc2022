@@ -6,6 +6,7 @@ import LoginModal from "./LoginModal";
 import * as FaIcons from "react-icons/fa";
 import * as FiIcons from "react-icons/fi";
 import * as AiIcons from "react-icons/ai";
+import * as ImIcons from "react-icons/im";
 import "./Navbar.css";
 
 import { postSignUp, postLogIn } from "../utils/postFunctions";
@@ -82,7 +83,7 @@ function Navbar() {
                         ) : (
                             <>
                                 <AiIcons.AiOutlinePlus className="sing-up-icon" onClick={handleSignUp} />
-                                <FiIcons.FiUserX onClick={handleLogIn} />
+                                <ImIcons.ImEnter onClick={handleLogIn} />
                             </>
                         )}
                     </Link>

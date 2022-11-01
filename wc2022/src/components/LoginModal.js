@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from "react-modal";
 
-export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
+export default function LoginModal({modalIsOpen, closeModal, handleSubmit, title}) {
     const customStyles = {
         content: {
             position: "absolute",   
@@ -43,7 +43,7 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit}) {
                     <label htmlFor={"passord"}>Password</label><br/>
                     <input id={"password"} style={inputStyle} type={"passowrd"} name={"passowrd"}/><br/>
                     <div className='submitWrapper'>
-                        <input style={submitStyle} type={"submit"} value={"Sign up"}/>
+                        <input style={submitStyle} type={"submit"} value={title}/>
                         {/* <input style={submitStyle} type={"submit"} value={"Sign in"}/> */}
                     </div>
                 </form>

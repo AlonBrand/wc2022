@@ -1,7 +1,9 @@
 import os
 from flask import Flask, request, render_template, session
 from flask_cors import CORS, cross_origin
+from numpy import number
 from openpyxl import load_workbook
+import json
 from utils.file_manager import *
 
 app = Flask(__name__, static_folder="./wc2022/build/static", template_folder="./wc2022/build")
@@ -25,6 +27,17 @@ def sign_up_func():
         'msg': return_msg
     }
 
+@app.route('/log-in', methods=['GET', 'POST'])
+def log_in_func():
+    user_name = request.get_json()['name']
+    user_password = request.get_json()['password']    
+    print(user_name)
+    print(user_password)
+    return {
+        'user_name': user_name,
+        'msg': search_in_table("users", user_name=user_name, user_password=user_password)
+    }
+
 @app.route('/games/bet-on-game', methods=['GET', 'POST'])
 def bet_on_game():
     print(request.get_json()['teamA'])
@@ -33,6 +46,14 @@ def bet_on_game():
     print(request.get_json()['scoreB'])
     return {
         'msg': 'Good Luck!!!'
+    }
+
+@app.route('/games/get_games')
+def get_games():
+    games = get_table("games")
+
+    return {
+        'games': json.dumps(games, default=str) 
     }
 
 if __name__ == '__main__':

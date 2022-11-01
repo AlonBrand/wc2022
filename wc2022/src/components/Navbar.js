@@ -8,13 +8,14 @@ import * as FiIcons from "react-icons/fi";
 import * as AiIcons from "react-icons/ai";
 import "./Navbar.css";
 
-import { postLogin } from "../utils/postLogin";
+import { postSignUp, postLogIn } from "../utils/postFunctions";
 
 function Navbar() {
     const [isConnected, setIsConnected] = useState(false);
     const [sidebar, setSideBar] = useState(false);
-    const [modalIsOpen, setModalIsOpen] = useState(true);
-    const [userName, setUserName] = useState("")
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [userName, setUserName] = useState("");
+    const [modalTitle, setModalTitle] = useState();
 
     const showSideBar = () => {
         setSideBar(!sidebar);
@@ -24,10 +25,15 @@ function Navbar() {
         setIsConnected(!isConnected);
     };
 
-    const handleConnect = () => {
-        console.log("Trying to connect...");
+    const handleSignUp = () => {
+        setModalTitle("Sign-up");
         setModalIsOpen(true);
     };
+
+    const handleLogIn = () => {
+        setModalTitle("Log-in");
+        setModalIsOpen(true);
+    }
 
     const handleDisconnect = () => {
         console.log("Trying to Disconnect...");
@@ -39,11 +45,21 @@ function Navbar() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        postLogin({
-            name: event.target.name.value,
-            password: event.target.password.value,
-            updateConnectedUserName: setUserName
-        })
+        if(modalTitle === "Sign-up"){
+            postSignUp({
+                name: event.target.name.value,
+                password: event.target.password.value,
+                updateConnectedUserName: setUserName,
+                setIsConnect: changeIsConnected
+            })
+        } else {
+            postLogIn({
+                name: event.target.name.value,
+                password: event.target.password.value,
+                updateConnectedUserName: setUserName,
+                setIsConnect: changeIsConnected
+            })
+        }
         closeModal();
     }
 
@@ -53,17 +69,21 @@ function Navbar() {
                 modalIsOpen={modalIsOpen}
                 closeModal={closeModal}
                 handleSubmit={handleSubmit}
+                title={modalTitle}
             />
             <IconContext.Provider value={{ color: "#fff" }}>
                 <div className="navbar">
                     <Link to="#" className="menu-bars">
                         <FaIcons.FaBars onClick={showSideBar} />
                     </Link>
-                    <Link to="#" className="menu-bars login" onClick={changeIsConnected}>
+                    <Link to="#" className="menu-bars login">
                         {isConnected ? (
-                            <span className="user-name-bar">{userName}</span>
+                            <span className="user-name-bar" onClick={handleDisconnect}>{userName} </span>
                         ) : (
-                            <FiIcons.FiUserX onClick={handleConnect} />
+                            <>
+                                <AiIcons.AiOutlinePlus className="sing-up-icon" onClick={handleSignUp} />
+                                <FiIcons.FiUserX onClick={handleLogIn} />
+                            </>
                         )}
                     </Link>
                 </div>

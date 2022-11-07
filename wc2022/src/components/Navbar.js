@@ -11,8 +11,8 @@ import "./Navbar.css";
 
 import { postSignUp, postLogIn } from "../utils/postFunctions";
 
-function Navbar() {
-    const [isConnected, setIsConnected] = useState(false);
+function Navbar(props) {
+    // const [isConnected, setIsConnected] = useState(false);
     const [sidebar, setSideBar] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [userName, setUserName] = useState("");
@@ -20,10 +20,6 @@ function Navbar() {
 
     const showSideBar = () => {
         setSideBar(!sidebar);
-    };
-
-    const changeIsConnected = () => {
-        setIsConnected(!isConnected);
     };
 
     const handleSignUp = () => {
@@ -37,7 +33,7 @@ function Navbar() {
     }
 
     const handleDisconnect = () => {
-        console.log("Trying to Disconnect...");
+        props.setIsConnected(()=>false);
     };
 
     const closeModal = () => {
@@ -51,14 +47,14 @@ function Navbar() {
                 name: event.target.name.value,
                 password: event.target.password.value,
                 updateConnectedUserName: setUserName,
-                setIsConnect: changeIsConnected
+                setIsConnect: props.setIsConnected
             })
         } else {
             postLogIn({
                 name: event.target.name.value,
                 password: event.target.password.value,
                 updateConnectedUserName: setUserName,
-                setIsConnect: changeIsConnected
+                setIsConnect: props.setIsConnected
             })
         }
         closeModal();
@@ -74,11 +70,14 @@ function Navbar() {
             />
             <IconContext.Provider value={{ color: "#fff" }}>
                 <div className="navbar">
+                    {
+                    props.isConnected &&
                     <Link to="#" className="menu-bars">
                         <FaIcons.FaBars onClick={showSideBar} />
                     </Link>
+                    }
                     <Link to="#" className="menu-bars login">
-                        {isConnected ? (
+                        {props.isConnected ? (
                             <span className="user-name-bar" onClick={handleDisconnect}>{userName} </span>
                         ) : (
                             <>

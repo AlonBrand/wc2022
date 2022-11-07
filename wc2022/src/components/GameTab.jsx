@@ -4,6 +4,7 @@ import "./GameTab.css";
 export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
+    const isAvailableGame = new Date() - date < 0;
 
     const betOnGame = async () => {
         let msg = "Server received your bet, good luck!!!"
@@ -32,7 +33,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
         <div className="game-tab-container" >
             <h2>{teamA} X {teamB}</h2>
             <br></br>
-            <p>{date}</p>
+            {date?.toString()}
+            <br></br>
             {
                 info !== undefined && 
                 <br></br> &&
@@ -48,7 +50,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                 <br></br>
                 <input id="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
             </form>
-            <div id={"response-placeholder"}></div>
+            {!isAvailableGame && <h3 style={{"paddingTop": "10px"}}>Game is not available!</h3>}
+            <div id={"response-placeholder"} style={{"paddingTop": "10px"}}></div>
         </div>
     )
 }

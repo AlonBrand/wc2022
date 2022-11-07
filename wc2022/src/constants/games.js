@@ -4,17 +4,16 @@ export const games =
             id: 1,
             teamA: "Qatar",
             teamB: "Ecuador",
-            date: new Date(2021, 10, 21, 18, 30)
+            date: new Date(2022, 10, 21, 18, 30)
             // info: "Test Info1"
         },
         {
             id: 2,
             teamA: "Qatar",
             teamB: "Ecuador",
-            date: "20-Nov 18:00",
-            date: new Date(2022, 10, 7, 16, 38)
+            date: new Date(2022, 10, 22, 13)
             // info: "Test Info1"
-        },
+        }
         // {
         //     id: 3,
         //     teamA: "Qatar",

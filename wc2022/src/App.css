@@ -31,12 +31,13 @@
   font-family: sans-serif;
   min-width: 400px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin: 0 auto;
 }
 
 .rank-table thead tr {
-  background-color: #009879;
+  background-color: #202649;
   color: #ffffff;
-  text-align: left;
+  /* text-align: left; */
 }
 
 .rank-table th,
@@ -53,12 +54,12 @@
 }
 
 .rank-table tbody tr:last-of-type {
-  border-bottom: 2px solid #009879;
+  border-bottom: 2px solid #202649;
 }
 
 .rank-table tbody tr.active-row {
   font-weight: bold;
-  color: #009879;
+  color: #202649;
 }
 
 .pageTitle {

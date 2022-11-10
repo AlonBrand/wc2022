@@ -17,6 +17,7 @@ function Navbar(props) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [userName, setUserName] = useState("");
     const [modalTitle, setModalTitle] = useState();
+    const [postInProgress, setPostInProgress] = useState(false);
 
     const showSideBar = () => {
         setSideBar(!sidebar);
@@ -33,6 +34,8 @@ function Navbar(props) {
     }
 
     const handleDisconnect = () => {
+        setModalTitle("Yes");
+        setModalIsOpen(true);
         props.setIsConnected(()=>false);
     };
 
@@ -47,17 +50,20 @@ function Navbar(props) {
                 name: event.target.name.value,
                 password: event.target.password.value,
                 updateConnectedUserName: setUserName,
-                setIsConnect: props.setIsConnected
+                setIsConnect: props.setIsConnected,
+                closeModal: closeModal,
+                setPostInProgress: setPostInProgress 
             })
         } else {
             postLogIn({
                 name: event.target.name.value,
                 password: event.target.password.value,
                 updateConnectedUserName: setUserName,
-                setIsConnect: props.setIsConnected
+                setIsConnect: props.setIsConnected,
+                closeModal: closeModal,
+                setPostInProgress: setPostInProgress 
             })
         }
-        closeModal();
     }
 
     return (
@@ -67,6 +73,7 @@ function Navbar(props) {
                 closeModal={closeModal}
                 handleSubmit={handleSubmit}
                 title={modalTitle}
+                postInProgress={postInProgress}
             />
             <IconContext.Provider value={{ color: "#fff" }}>
                 <div className="navbar">

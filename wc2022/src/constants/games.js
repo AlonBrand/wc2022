@@ -9,9 +9,9 @@ export const games =
         },
         {
             id: 2,
-            teamA: "Qatar",
-            teamB: "Ecuador",
-            date: new Date(2022, 10, 22, 13)
+            teamA: "Senegal",
+            teamB: "Netherlands",
+            date: new Date(2022, 10, 22, 18, 30)
             // info: "Test Info1"
         }
         // {

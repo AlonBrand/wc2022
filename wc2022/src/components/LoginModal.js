@@ -1,7 +1,8 @@
 import React from 'react';
 import Modal from "react-modal";
+import spinner from "../images/spinner.gif"
 
-export default function LoginModal({modalIsOpen, closeModal, handleSubmit, title}) {
+export default function LoginModal({modalIsOpen, closeModal, handleSubmit, title, postInProgress}) {
     const customStyles = {
         content: {
             position: "absolute",   
@@ -9,10 +10,10 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit, title
             left: "50%",
             right: "auto",
             bottom: "auto",
-            marginRight: "-50%",
+            // marginRight: "-50%",
             transform: "translate(-50%, -50%)",
             borderStyle: "double",
-            padding: "25px",
+            padding: "50px",
             border: "1px"
         },
     };
@@ -23,8 +24,12 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit, title
     }
     
     const submitStyle = {
+        marginTop: "10px",
         height: "50px",
-        width: "100px",
+        width: "151px",
+        backgroundColor: "#202649",
+        color: "white",
+        borderRadius: "10px"
     }
 
     return(
@@ -43,11 +48,14 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit, title
                     <label htmlFor={"passord"}>Password</label><br/>
                     <input id={"password"} style={inputStyle} type={"passowrd"} name={"passowrd"}/><br/>
                     <div className='submitWrapper'>
-                        <input style={submitStyle} type={"submit"} value={title}/>
+                        {
+                            postInProgress ? <img src={spinner} /> : 
+                        <   input style={submitStyle} type={"submit"} value={title}/>
+                        }
                         {/* <input style={submitStyle} type={"submit"} value={"Sign in"}/> */}
                     </div>
                 </form>
-                <div id={"login-placeHolder"}></div>
+                <div id={"login-placeHolder"} style={{paddingTop: "15px"}}></div>
             </div>
         </Modal>
     )

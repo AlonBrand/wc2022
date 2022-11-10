@@ -9,13 +9,15 @@ function Rank() {
         const getUsers = () => {
             try{
                 if (users === undefined) {
-                    fetch("https://alon-wc22.herokuapp.com/users")
+                    // fetch("https://alon-wc22.herokuapp.com/users")
+                    fetch("http://127.0.0.1:5000/users")
                     .then((response) => response.json()
                     .then((data) => {
+                        console.log(data)
                         setUsers(()=> data?.users?.map((user) => {
                             return {
-                                name: user[0],
-                                points: user[2]
+                                name: user[1],
+                                points: user[3]
                             }
                          }
                         )?.sort((a, b) => b?.points - a?.points))
@@ -30,7 +32,7 @@ function Rank() {
 
     return (
         <div className="rank">
-            <h1 style={{"paddingTop": "50px", "paddingBottom": "41.5px"}}>Rank</h1>
+            <h1 style={{"paddingTop": "50px", "paddingBottom": "41.5px"}}>Tournament Table</h1>
             <table className="rank-table">
                 <thead>
                     <tr>

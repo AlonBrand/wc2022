@@ -12,17 +12,18 @@ export const postSignUp = async ({ name, password, updateConnectedUserName, setI
         let response = await fetch("http://127.0.0.1:5000/sign-up", requestOptions);
         response.json()
         .then((data) => {
-            setPostInProgress(()=>false);
             console.log(data)
-            if(data?.msg === 'UNIQUE constraint failed: Users.name'){
-                    const element = document.getElementById("login-placeHolder");
-                    element.innerHTML = '<h5> User name already exist! </h5>';
-                }
-                else {
-                    updateConnectedUserName(`Hi, ${data?.user_name}`)
-                    setIsConnect(()=>true);
-                    closeModal();
-                }
+            setPostInProgress(()=>false);
+            if (data?.msg === 'UNIQUE constraint failed: Users.name') {
+                const element = document.getElementById("login-placeHolder");
+                element.innerHTML = '<h5> User name already exist! </h5>';
+            }
+            else {
+                window.USER_ID = data?.user_id;
+                updateConnectedUserName(`Hi, ${data?.user_name}`)
+                setIsConnect(() => true);
+                closeModal();
+            }
             });
     } catch (e) {
         setPostInProgress(()=>false)

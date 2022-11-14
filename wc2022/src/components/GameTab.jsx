@@ -11,7 +11,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB }),
+            body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB, userId: window.USER_ID }),
         };
         try {
             let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);

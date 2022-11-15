@@ -21,7 +21,7 @@ function Games() {
 
   return (
     <>
-      <h1 className='pageTitle'>Games</h1>
+      <h1 className='pageTitle' style={{paddingBottom: "25px"}}>Games</h1>
       <div className='games'>
         {games !== undefined && getGamesContent()}
       </div>

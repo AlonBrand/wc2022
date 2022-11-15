@@ -30,8 +30,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     }
 
     return (
-        <div className="game-tab-container" >
-            <h2>{teamA} X {teamB}</h2>
+        <div className="game-tab-container" style={{marginBottom: "10px"}}>
+            <h2 style={{"paddingTop": "25px"}}>{teamA} X {teamB}</h2>
             <br></br>
             {date?.toString()}
             <br></br>
@@ -44,13 +44,13 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
             <br></br>
             <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
                 <div className="bet-line">
-                    <input id="left-bet" type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
-                    <input id="right-bet" type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
+                    <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
+                    <input id="right-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
                 </div>
                 <br></br>
-                <input id="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
             </form>
-            {!isAvailableGame && <h3 style={{"paddingTop": "10px"}}>Game is not available!</h3>}
+            {!isAvailableGame && <h3 style={{padding: "10px", marginBottom: "20px"}}>Game is not available!</h3>}
             <div id={"response-placeholder"} style={{"paddingTop": "10px"}}></div>
         </div>
     )

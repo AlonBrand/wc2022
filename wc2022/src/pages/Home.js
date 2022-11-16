@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../App.css";
+import fifaLogo from "../images/fifa-logo.svg"
 
 function Home() {
   const [currentRank, setCurrentRank] = useState();
@@ -33,11 +34,8 @@ function Home() {
 
   return (
     <>
-      <h1 className='pageTitle'>World Cup 2022</h1>
-      <div className='home-page-content'>
-        <h3>{`Your Rank: ${currentRank}`}</h3>
-        <h3>{`Your Points: ${currentPoints}`}</h3>
-      </div>
+      {/* <h1 className='pageTitle'>World Cup 2022</h1> */}
+      <img src={fifaLogo}/>
     </>
   )
 }

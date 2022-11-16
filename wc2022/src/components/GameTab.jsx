@@ -53,7 +53,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         />
                         <h4 style={{"paddingTop": "5px"}}>{teamA}</h4>
                     </div>
-                        <h3 style={{"paddingTop":"15px","text-align":"center"}}>VS</h3>
+                        <h3 style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
                     
                     <div>
                     <ReactCountryFlag

@@ -96,7 +96,11 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     }
 
     return (
-        <div id="game_tab_overlay">
+        <div id="game_tab_overlay" 
+            style={{
+                "display": ""
+            }}
+        >
             <div className="game-tab-container" style={{marginBottom: "30px"}}>
                     {getFlagIcon()}
                     <br></br>

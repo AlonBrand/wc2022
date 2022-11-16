@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "react-country-flag": "^3.0.2",
     "react-icons": "^4.4.0",
     "react-router-dom": "^5.2.0"
   }

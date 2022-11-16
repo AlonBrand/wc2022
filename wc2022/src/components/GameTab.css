@@ -1,11 +1,15 @@
 .game-tab-container {
-    padding: 50px;
-    border: 1px solid black;
+    /* padding: 50px; */
+    width: 80%;
+    /* border: 1px solid black; */
     display: block;
-    margin: 50px;
+    /* margin: 15px; */
+    /* margin-top: 15px; */
     background-color: #f4f8fc;
     border-radius: 9px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
 
 .bet-line {
     display: flex;
@@ -24,4 +28,13 @@
 
 #bet-button {
     padding: 10px 30px 10px 30px;
+}
+
+.bet-button {
+    transition-duration: 0.4s;
+  }
+  
+.bet-button:hover {
+    background-color: #4CAF50; /* Green */
+    color: white;
 }

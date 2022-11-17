@@ -62,7 +62,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         "paddingTop": "15px"
                     }}
                 >
-                    <div>
+                    <div style={{"justifyContent": "center", "verticalAlign": "center"}}>
                         <ReactCountryFlag
                             countryCode={flagsPaths[teamA]}
                             svg
@@ -91,8 +91,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                 </div>
             </>
         )
-
     }
+    
     const getDateTime = () => {
         return  (
             <>

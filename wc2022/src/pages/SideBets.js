@@ -39,10 +39,6 @@ const topScorerOptions = [
     { value: 'vanilla', label: 'Vanilla' }
 ]
 
-const style = {
-    margin: "0px 20px 20px 20px"
-}
-
 const handleWinningTeam = (e) => {
     setWinningTeam(()=>e?.label)
 }
@@ -57,13 +53,13 @@ const disableSend = () => winningTeam === undefined || topScorer === undefined;
 return (
     <div>
         <img src={fifaLogo}/>
-        <div style={style} className="side-bets">
+        <div style={{margin: "0px 20px 20px 20px"}} className="side-bets">
             <h2 style={{marginBottom: "10px"}}> Winnig Team</h2>
             <Select 
                 options={winningTeamOptions} 
                 onChange={(e) => handleWinningTeam(e)}
             />
-            <h2 style={{marginBottom: "10px", marginTop: "20px"}}> Top Scorer</h2>
+            <h2 style={{marginBottom: "10px", marginTop: "20px"}}>Top Scorer</h2>
             <Select 
                 options={topScorerOptions} 
                 onChange={(e) => handleTopScorer(e)}

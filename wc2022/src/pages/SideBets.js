@@ -6,6 +6,7 @@ import "../App.css";
 function SideBets() {
 const [winningTeam, setWinningTeam] = useState();
 const [topScorer, setTopScorrer] = useState();
+const isAvailableGame = (new Date() - new Date(2022, 10, 20, 18)) < 0;
 
 
 const betOnGame = async () => {
@@ -81,7 +82,7 @@ const handleTopScorer = (e) => {
 }
 
 
-const disableSend = () => winningTeam === undefined || topScorer === undefined;
+const disableSend = () => winningTeam === undefined || topScorer === undefined || (isAvailableGame === false);
 
 return (
     <div>
@@ -91,12 +92,14 @@ return (
             <h3 style={{marginBottom: "10px"}}> Winning Team</h3>
             <Select
                 styles={{"paddingBottom": "10px"}} 
-                options={winningTeamOptions} 
+                options={winningTeamOptions}
+                isDisabled={!isAvailableGame}
                 onChange={(e) => handleWinningTeam(e)}
             />
             <h3 style={{marginBottom: "10px", marginTop: "20px"}}>Top Scorer</h3>
             <Select 
-                options={topScorerOptions} 
+                options={topScorerOptions}
+                isDisabled={!isAvailableGame}
                 onChange={(e) => handleTopScorer(e)}
             />
             <div style={{textAlign: "center", marginTop: "30px", "marginBotto": "50px"}}> 

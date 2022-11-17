@@ -13,7 +13,7 @@ const betOnGame = async () => {
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ winningTeam: winningTeam, topScorer: topScorer }),
+        body: JSON.stringify({ userId: window.USER_ID, winningTeam: winningTeam, topScorer: topScorer }),
     };
     try {
         let response = await fetch("http://127.0.0.1:5000/side-bets", requestOptions);
@@ -28,15 +28,48 @@ const betOnGame = async () => {
 }
 
 const winningTeamOptions = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
+    { value: 'Brazil', label: 'Brazil' },
+    { value: 'Belgium', label: 'Belgium' },
+    { value: 'Argentina', label: 'Argentina' },
+    { value: 'France', label: 'France' },
+    { value: 'England', label: 'England' },
+    { value: 'Spain', label: 'Spain' },
+    { value: 'Netherlands', label: 'Netherlands' },
+    { value: 'Portugal', label: 'Portugal' },
+    { value: 'Denmark', label: 'Denmark' },
+    { value: 'Germany', label: 'Germany' },
+    { value: 'Croatia', label: 'Croatia' },
+    { value: 'Mexico', label: 'Mexico' },
+    { value: 'Uruguay', label: 'Uruguay' },
+    { value: 'Switzerland', label: 'Switzerland' },
+    { value: 'USA', label: 'USA' },
+    { value: 'Senegal', label: 'Senegal' },
+    { value: 'Wales', label: 'Wales' },
+    { value: 'Iran', label: 'Iran' },
+    { value: 'Serbia', label: 'Serbia' },
+    { value: 'Morocco', label: 'Morocco' },
+    { value: 'Japan', label: 'Japan' },
+    { value: 'Poland', label: 'Poland' },
+    { value: 'South Korea', label: 'South Korea' },
+    { value: 'Costa Rica', label: 'Costa Rica' },
+    { value: 'Canada', label: 'Canada' },
+    { value: 'Cameroon', label: 'Cameroon' },
+    { value: 'Ecuador', label: 'Ecuador' },
+    { value: 'Qatar', label: 'Qatar' },
+    { value: 'Saudi Arabia', label: 'Saudi Arabia' },
+    { value: 'Ghana', label: 'Ghana' },
 ]
 
 const topScorerOptions = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
+    { value: 'Harry Kane', label: 'Harry Kane' },
+    { value: 'Kylian Mbappe', label: 'Kylian Mbappe' },
+    { value: 'Karim Benzema', label: 'Karim Benzema' },
+    { value: 'Lionel Messi', label: 'Lionel Messi' },
+    { value: 'Neymar', label: 'Neymar' },
+    { value: 'Cristiano Ronaldo', label: 'Cristiano Ronaldo' },
+    { value: 'Romelu Lukaku', label: 'Romelu Lukaku' },
+    { value: 'Lautaro Martinez', label: 'Lautaro Martinez' },
+    { value: 'Memphis Depay', label: 'Memphis Depay' },
 ]
 
 const handleWinningTeam = (e) => {
@@ -64,8 +97,10 @@ return (
                 options={topScorerOptions} 
                 onChange={(e) => handleTopScorer(e)}
             />
-            <button disabled={disableSend()} onClick={betOnGame}>Send</button>
-            <div id='side-bets-placeholder'></div>
+            <div style={{textAlign: "center", marginTop: "30px"}}> 
+                <button id="side-bet-button" style={{marginBottom: "20px", height: "50px", width: "100px", borderRadius: "4px"}} disabled={disableSend()} onClick={betOnGame}>Send</button>
+                <div id='side-bets-placeholder'></div>
+            </div>
         </div>
     </div>
   )

@@ -37,17 +37,17 @@ function Home() {
     return (
       <>
         {
-          Object.values(games)?.map((game) => {
+          Object.values(games)?.map((game, index) => {
             if (new Date().getDay() === game?.date?.getDay()) {
               return (
-                <div className="game-tab-container" style={{ margin: "30px", width: "auto" }}>
+                <div key={index} className="game-tab-container" style={{ margin: "30px", width: "auto" }}>
                   <div 
                     style={{
                         "display":"flex",
                         "flexDirection":"row",
                         "justifyContent":"space-around",
                         "paddingTop": "15px",
-                        "text-align": "center"
+                        "textAlign": "center"
                     }}
                 >
                     <div style={{justifyContent: "center"}}>

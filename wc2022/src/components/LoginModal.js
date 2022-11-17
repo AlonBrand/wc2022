@@ -14,7 +14,10 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit, handl
             transform: "translate(-50%, -50%)",
             borderStyle: "double",
             padding: "20px",
-            border: "1px"
+            border: "1px",
+            height: title !== 'log-out' ? "250px" : "150px",
+            width: "300px",
+            textAlign: "center"
         },
     };
 
@@ -62,8 +65,8 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit, handl
                     :
                     <div style={{ textAlign: "center"}}>
                     <h4 style={{marginBottom: "20px"}}>Are you sure you want to log out?</h4>
-                        <button style={{marginRight: "10px", width: "50px"}} onClick={handleLogOut}>Yes</button>
-                        <button style={{marginLeft: "10px", width: "50px"}} onClick={handleCancelLogOut}>No</button>
+                        <button style={{marginRight: "10px", width: "100px", height: "50px"}} onClick={handleLogOut}>Yes</button>
+                        <button style={{marginLeft: "10px", width: "100px", height: "50px"}} onClick={handleCancelLogOut}>No</button>
                     </div>
                 }
 

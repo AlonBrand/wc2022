@@ -26,8 +26,11 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
         } catch (e) {
             msg = "Faild to send bet, please try again"
         }
-        document.getElementById("response-placeholder").innerText = msg;
-        document.getElementById("response-placeholder").display = 'block'
+        document.getElementById(`response-placeholder-${id}`).innerText = msg;
+        document.getElementById(`response-placeholder-${id}`).display = 'block';
+        setTimeout(() => {
+            document.getElementById(`response-placeholder-${id}`).innerText = '';
+        }, 4000);
     }
 
     const betRealScore = async () => {
@@ -188,7 +191,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                             <br></br>
                             <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                         </form>
-                    <div id={"response-placeholder"} style={{"paddingTop": "10px"}}></div>
+                    <div id={`response-placeholder-${id}`} style={{"padding": "10px 0px 10px 0px"}}></div>
                  </>
                 }
                 {adminCounter >= 7 && 
@@ -201,7 +204,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                     </form>
                 }
-                <div id={"response-placeholder"} style={{"paddingTop": "10px", "display":"none"}}></div>
+                <div id={`response-placeholder-${id}`} style={{"paddingTop": "10px", "display":"none"}}></div>
         </div>
     )
 }

@@ -41,6 +41,7 @@ function Navbar(props) {
     const handleLogOut = () => {
         setModalIsOpen(false)
         props.setIsConnected(()=>false);
+        window.USER_ID = undefined;
     }
 
     const handleCancelLogOut = () => {

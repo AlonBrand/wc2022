@@ -25,7 +25,7 @@ function Games() {
       <div>
         <img src={fifaLogo}/>
       </div>
-      <h2 className='pageTitle' style={{padding: "45px" }}>Matches</h2>
+      <h2 className='pageTitle' style={{padding: "20px" }}>Matches</h2>
       <div className='games'>
         {games !== undefined && getGamesContent()}
       </div>

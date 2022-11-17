@@ -6,6 +6,7 @@ import ReactCountryFlag from "react-country-flag"
 export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
+    const [adminCounter, setAdminCounter] = useState(0);
     const isAvailableGame = new Date() - date < 0;
 
     const betOnGame = async () => {
@@ -16,8 +17,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
             body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB, userId: window.USER_ID }),
         };
         try {
-            // let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);
-            let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
+            let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);
+            // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
@@ -25,6 +26,25 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
             msg = "Faild to send bet, please try again"
         }
         document.getElementById("response-placeholder").innerText = msg;
+    }
+
+    const betRealScore = async () => {
+        setAdminCounter(0);
+        const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB, userId: window.USER_ID}),
+        };
+        try {
+            let response = await fetch("http://127.0.0.1:5000/games/bet-real-score", requestOptions);
+            // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
+            let response_data = response.json()
+            .then((data) => console.log(data));
+            // updateConnectedUserName(`Hi, ${response_data?.msg}`)
+        } catch (e) {
+            console.log(e);
+        }
+        // document.getElementById("response-placeholder").innerText = msg;
     }
     
     const validateInput = () => {
@@ -54,7 +74,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         />
                         <h4 style={{"paddingTop": "5px"}}>{teamA}</h4>
                     </div>
-                        <h3 style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
+                        <h3 onClick={increaseAdminCount} style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
                     
                     <div>
                     <ReactCountryFlag
@@ -93,7 +113,10 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                 </div>
             </>
         )
+    }
 
+    const increaseAdminCount = () => {
+        setAdminCounter((prevCounter) => prevCounter+1);
     }
 
     return (
@@ -117,6 +140,16 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                     <br></br>
                     <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                 </form>
+                {adminCounter >= 7 && 
+                    <form onSubmit={(e) => {e.preventDefault(); betRealScore()}} style={{marginTop: "20px"}}>
+                        <div className="bet-line">
+                            <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
+                            <input id="right-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
+                        </div>
+                        <br></br>
+                        <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                    </form>
+                }
                 {!isAvailableGame && <h3 style={{padding: "10px", marginBottom: "20px"}}>Game is not available!</h3>}
                 <div id={"response-placeholder"} style={{"paddingTop": "10px"}}></div>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
+import * as BsIcons from "react-icons/bs";
 
 export const SidebarData = [
     {
@@ -16,15 +17,16 @@ export const SidebarData = [
         className: 'nav-text'
     },
     {
+        title: 'Side Bets',
+        path: '/side-bets',
+        icon: <BsIcons.BsCash />,
+        className: 'nav-text'
+    },
+    {
         title: 'Table',
         path: '/table',
         icon: <AiIcons.AiOutlineTrophy />,
         className: 'nav-text'
-    },   
-    {
-        title: 'Support',
-        path: '/support',
-        icon: <IoIcons.IoMdHelpCircle />,
-        className: 'nav-text'
     }   
 ]
+    

@@ -36,6 +36,7 @@ function Home() {
     <>
       {/* <h1 className='pageTitle'>World Cup 2022</h1> */}
       <img src={fifaLogo}/>
+      <h2 className='pageTitle' style={{padding: "20px" }}>Today's Games</h2>
     </>
   )
 }

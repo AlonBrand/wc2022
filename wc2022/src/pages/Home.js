@@ -13,8 +13,8 @@ function Home() {
     const getSideBets = () => {
         try{
             if (winningTeam === undefined || topScorer === undefined) {
-                // fetch("https://alon-wc22.herokuapp.com/users")
-                fetch(`http://127.0.0.1:5000/get-side-bets/${window.USER_ID}`)
+                fetch(`https://alon-wc22.herokuapp.com/get-side-bets/${window.USER_ID}`)
+                // fetch(`http://127.0.0.1:5000/get-side-bets/${window.USER_ID}`)
                 .then((response) => response.json()
                 .then((data) => {
                     console.log(data)

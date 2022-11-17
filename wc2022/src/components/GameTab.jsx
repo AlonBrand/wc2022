@@ -207,7 +207,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                     </div> 
                 :
                  <>
-                    <div style={{"paddingTop":"2px"}}>
+                    <div style={{"paddingBottom":"10px"}}>
                         {getFlagIcon()}
                         <br></br>
                         {getDateTime()}

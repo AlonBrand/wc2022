@@ -5,6 +5,26 @@ import { games } from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
 
 function Games() {
+  useEffect(() => {
+      const getUserBets = () => {
+          try{
+                  fetch("https://alon-wc22.herokuapp.com/userBets")
+                  // fetch(`http://127.0.0.1:5000/userBets/${window.USER_ID}`)
+                  .then((response) => response.json()
+                  .then((data) => {
+                      for(let bet of data?.userBets) {
+                        if(Array.isArray(bet) && bet?.length >= 4) {
+                          document.getElementById(`your-bet-placeholder-${bet[2]}`).innerText = `Your current bet is: ${bet[3]} - ${bet[4]}`;
+                          document.getElementById(`your-bet-placeholder-${bet[2]}`).display = 'block';
+                      }
+                    }
+              }))
+          } catch(e) {
+              console.log(e)
+          }
+      }
+      getUserBets();
+  }, []);
 
   const getGamesContent = () => {
     return (

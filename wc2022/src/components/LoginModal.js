@@ -17,8 +17,9 @@ export default function LoginModal({modalIsOpen, closeModal, handleSubmit, handl
             border: "1px",
             height: title !== 'log-out' ? "250px" : "150px",
             width: "300px",
-            textAlign: "center"
+            textAlign: "center",
         },
+        overlay: {zIndex: "900"}
     };
 
     const inputStyle = {

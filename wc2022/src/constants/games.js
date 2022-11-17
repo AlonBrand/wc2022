@@ -234,6 +234,7 @@ export const flagsPaths = {
     "Vanuatu":"VU",
     "Venezuela":"VE",
     "Viet Nam":"VN",
+    "Wales": "GB-WLS",
     "Wallis and Futuna":"WF",
     "Western Sahara":"EH",
     "Yemen":"YE",
@@ -248,7 +249,7 @@ export const games =
             id: 1,
             teamA: "Qatar",
             teamB: "Ecuador",
-            date: new Date(2022, 10, 20, 18)
+            date: new Date(2022, 10, 17, 22)
         },
         {
             id: 2,
@@ -269,44 +270,143 @@ export const games =
             teamB: "Saudi Arabia",
             date: new Date(2022, 10, 22, 12),
         },
-        // {
-        //     id: 4,
-        //     teamA: "Qatar",
-        //     teamB: "Ecuador",
-        //     date: "20-Nov 18:00",
-        //     // info: "Test Info1"
-        // },
-        // {
-        //     id: 5,
-        //     teamA: "Qatar",
-        //     teamB: "Ecuador",
-        //     date: "20-Nov 18:00",
-        //     // info: "Test Info1"
-        // },
-        // {
-        //     id: 6,
-        //     teamA: "Qatar",
-        //     teamB: "Ecuador",
-        //     date: "20-Nov 18:00",
-        //     // info: "Test Info1"
-        // },
-        // {
-        //     id: 2,
-        //     teamA: "Iran",
-        //     teamB: "Mexico",
-        //     date: Date(),
-        //     // info: "Test Info1"
-        // },
-        // {
-        //     id: 3,
-        //     teams: "Argentina - Usa",
-        //     date: Date(),
-        //     // info: "Test Info3"
-        // },
-        // {
-        //     id: 4,
-        //     teams: "Argentina - Usa",
-        //     date: Date(),
-        //     // info: "Test Info4"
-        // }
+        {
+            id: 5,
+            teamA: "Denmark",
+            teamB: "Tunisia",
+            date: new Date(2022, 10, 22, 15),
+        },
+        {
+            id: 6,
+            teamA: "Mexico",
+            teamB: "Poland",
+            date: new Date(2022, 10, 22, 18),
+        },
+        {
+            id: 7,
+            teamA: "France",
+            teamB: "Australia",
+            date: new Date(2022, 10, 22, 21),
+        },
+        {
+            id: 8,
+            teamA: "Morocco",
+            teamB: "Croatia",
+            date: new Date(2022, 10, 23, 12),
+        },
+        {
+            id: 9,
+            teamA: "Germany",
+            teamB: "Japan",
+            date: new Date(2022, 10, 23, 15),
+        },
+        {
+            id: 10,
+            teamA: "Spain",
+            teamB: "Costa Rica",
+            date: new Date(2022, 10, 23, 18),
+        },
+        {
+            id: 11,
+            teamA: "Belgium",
+            teamB: "Canada",
+            date: new Date(2022, 10, 23, 21),
+        },
+        {
+            id: 12,
+            teamA: "Switzerland",
+            teamB: "Cameroon",
+            date: new Date(2022, 10, 24, 12),
+        },
+        {
+            id: 13,
+            teamA: "Uruguay",
+            teamB: "Korea",
+            date: new Date(2022, 10, 24, 15),
+        },
+        {
+            id: 14,
+            teamA: "Portugal",
+            teamB: "Ghana",
+            date: new Date(2022, 10, 24, 18),
+        },
+        {
+            id: 15,
+            teamA: "Brazil",
+            teamB: "Serbia",
+            date: new Date(2022, 10, 24, 12),
+        },
+        {
+            id: 16,
+            teamA: "Wales",
+            teamB: "Iran",
+            date: new Date(2022, 10, 25, 15),
+        },
+        {
+            id: 17,
+            teamA: "Qatar",
+            teamB: "Senegal",
+            date: new Date(2022, 10, 25, 18),
+        },
+        {
+            id: 18,
+            teamA: "Netherlands",
+            teamB: "Ecuador",
+            date: new Date(2022, 10, 25, 21),
+        },
+        {
+            id: 19,
+            teamA: "England",
+            teamB: "United States",
+            date: new Date(2022, 10, 25, 21),
+        },
+        {
+            id: 20,
+            teamA: "Tunisia",
+            teamB: "Australia",
+            date: new Date(2022, 10, 26, 12),
+        },
+        {
+            id: 21,
+            teamA: "Poland",
+            teamB: "Saudi Arabia",
+            date: new Date(2022, 10, 26, 15),
+        },
+        {
+            id: 22,
+            teamA: "France",
+            teamB: "Denmark",
+            date: new Date(2022, 10, 26, 18),
+        },
+        {
+            id: 23,
+            teamA: "Argentina",
+            teamB: "Mexico",
+            date: new Date(2022, 10, 26, 19),
+        },
+        {
+            id: 24,
+            teamA: "Japan",
+            teamB: "Costa Rica",
+            date: new Date(2022, 10, 27, 12),
+        },
+        {
+            id: 25,
+            teamA: "Belgium",
+            teamB: "Marocco",
+            date: new Date(2022, 10, 27, 15),
+        },
+        {
+            id: 26,
+            teamA: "Croatia",
+            teamB: "Canada",
+            date: new Date(2022, 10, 27, 18),
+        },
+        {
+            id: 27,
+            teamA: "Spain",
+            teamB: "Germany",
+            date: new Date(2022, 10, 27, 21),
+        },
+
     ]

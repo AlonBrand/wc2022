@@ -6,6 +6,8 @@ import ReactCountryFlag from "react-country-flag"
 export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
+    const [realScoreA, setRealScoreA] = useState();
+    const [realScoreB, setRealScoreB] = useState();
     const [adminCounter, setAdminCounter] = useState(0);
     const isAvailableGame = new Date() - date < 0;
     // const isAvailableGame = false;
@@ -34,12 +36,11 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     }
 
     const betRealScore = async () => {
-        return
         setAdminCounter(0);
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB, userId: window.USER_ID}),
+            body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: realScoreA, scoreB: realScoreB }),
         };
         try {
             // let response = await fetch("http://127.0.0.1:5000/games/bet-real-score", requestOptions);
@@ -124,22 +125,23 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const increaseAdminCount = () => {
         setAdminCounter((prevCounter) => prevCounter+1);
     }
-    const getScoreGameEnd = () => {
+
+    const getScoreGameEnd = (betA, betB) => {
         return  (
             <>
-               <div 
+               <div id={`last-bet-${id}`}
                     style={{
-                        "display":"flex",
+                        "display": "none",
                         "flexDirection":"row",
                         "justifyContent":"space-evenly",
                         "paddingTop": "20px"
                     }}
                 >
-                    <h3>
-                        0
+                    <h3 id={`last-betA-${id}`}>
+                        {betA}
                     </h3>
-                    <h3 style={{fontStyle:"bold"}}>
-                        3
+                    <h3 id={`last-betB-${id}`} style={{fontStyle:"bold"}}>
+                        {betB}
                     </h3>
                 </div>
             </>
@@ -159,7 +161,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         <br></br>
                         {getDateTime()}
                         {/* <br></br> */}
-                        {/* {getScoreGameEnd()} */}
+                        {getScoreGameEnd()}
                         <br></br>
                         {
                             info !== undefined && 
@@ -168,7 +170,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
 
                         }
                         <br></br>
-                        <h3 style={{paddingBottom: "15px"}}>No more bet kapara!</h3> 
+                        <h3 >No more bet kapara!</h3> 
+                        <div style={{paddingBottom: "15px"}} id={`your-bet-placeholder-${id}`} ></div>
                     </div> 
                 :
                  <>
@@ -191,17 +194,18 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                             <br></br>
                             <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                         </form>
-                    <div id={`response-placeholder-${id}`} style={{"padding": "10px 0px 10px 0px"}}></div>
+                    <div id={`response-placeholder-${id}`} ></div>
+                    <div id={`your-bet-placeholder-${id}`} ></div>
                  </>
                 }
                 {adminCounter >= 7 && 
                     <form onSubmit={(e) => {e.preventDefault(); betRealScore()}} style={{marginTop: "20px"}}>
                         <div className="bet-line">
-                            <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
-                            <input id="right-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
+                            <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setRealScoreA(e.target.value)}></input>
+                            <input id="right-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setRealScoreB(e.target.value)}></input>
                         </div>
                         <br></br>
-                        <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                        <input id="bet-button" className="bet-button" type="submit" value={'Bet'}></input>
                     </form>
                 }
                 <div id={`response-placeholder-${id}`} style={{"paddingTop": "10px", "display":"none"}}></div>

@@ -16,8 +16,8 @@ const betOnGame = async () => {
         body: JSON.stringify({ userId: window.USER_ID, winningTeam: winningTeam, topScorer: topScorer }),
     };
     try {
-        let response = await fetch("http://127.0.0.1:5000/side-bets", requestOptions);
-        // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
+        // let response = await fetch("http://127.0.0.1:5000/side-bets", requestOptions);
+        let response = await fetch("https://alon-wc22.herokuapp.com/side-bets", requestOptions);
         let response_data = response.json()
         .then((data) => console.log(data));
         // updateConnectedUserName(`Hi, ${response_data?.msg}`)

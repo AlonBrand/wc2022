@@ -31,6 +31,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     }
 
     const betRealScore = async () => {
+        return
         setAdminCounter(0);
         const requestOptions = {
             method: "POST",

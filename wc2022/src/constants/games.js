@@ -248,21 +248,21 @@ export const games =
             id: 1,
             teamA: "Qatar",
             teamB: "Ecuador",
-            date: new Date(2022, 10, 17, 18, 30)
+            date: new Date(2022, 10, 20, 18)
             // info: "Test Info1"
         },
         {
             id: 2,
-            teamA: "Senegal",
-            teamB: "Netherlands",
-            date: new Date(2022, 10, 17, 18, 30)
+            teamA: "England",
+            teamB: "Iran",
+            date: new Date(2022, 10, 21, 15)
             // info: "Test Info1"
         },
         {
             id: 3,
-            teamA: "England",
-            teamB: "Iran",
-            date: new Date(2022, 10, 14, 15)
+            teamA: "Senegal",
+            teamB: "Netherlands",
+            date: new Date(2022, 10, 21, 18)
             // info: "Test Info1"
         },
         // {

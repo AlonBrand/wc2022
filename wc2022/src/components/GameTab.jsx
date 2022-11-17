@@ -8,6 +8,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const [scoreB, setScoreB] = useState();
     const [adminCounter, setAdminCounter] = useState(0);
     const isAvailableGame = new Date() - date < 0;
+    // const isAvailableGame = false;
 
     const betOnGame = async () => {
         let msg = "Server received your bet, good luck!!!"
@@ -118,28 +119,76 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const increaseAdminCount = () => {
         setAdminCounter((prevCounter) => prevCounter+1);
     }
+    const getScoreGameEnd = () => {
+        return  (
+            <>
+               <div 
+                    style={{
+                        "display":"flex",
+                        "flexDirection":"row",
+                        "justifyContent":"space-evenly",
+                        "paddingTop": "20px"
+                    }}
+                >
+                    <h3>
+                        0
+                    </h3>
+                    <h3 style={{fontStyle:"bold"}}>
+                        3
+                    </h3>
+                </div>
+            </>
+        )
+
+    }
 
     return (
-        <div className="game-tab-container" style={{marginBottom: "30px"}}>
-                {getFlagIcon()}
-                <br></br>
-                {getDateTime()}
-                <br></br>
-                {
-                    info !== undefined && 
-                    <br></br> &&
-                    <p>{info}</p>
+            <div className="game-tab-container" style={{marginBottom: "30px"}}>       
+                {!isAvailableGame ? 
+                    <div id="game-tab-overlay"
+                        style={{
+                            "display": "block"
+                        }}
+                    >
+                        {getFlagIcon()}
+                        <br></br>
+                        {getDateTime()}
+                        {/* <br></br> */}
+                        {getScoreGameEnd()}
+                        <br></br>
+                        {
+                            info !== undefined && 
+                            <br></br> &&
+                            <p>{info}</p>
 
-                }
-                <br></br>
-                <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
-                    <div className="bet-line">
-                        <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
-                        <input id="right-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
-                    </div>
+                        }
+                        <br></br>
+                        <h3 style={{paddingBottom: "15px"}}>Game Finished!</h3> 
+                    </div> 
+                :
+                 <>
+                    {getFlagIcon()}
                     <br></br>
-                    <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
-                </form>
+                    {getDateTime()}
+                    <br></br>
+                    {
+                        info !== undefined && 
+                        <br></br> &&
+                        <p>{info}</p>
+
+                    }
+                    <br></br>
+                        <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
+                            <div className="bet-line">
+                                <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
+                                <input id="right-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
+                            </div>
+                            <br></br>
+                            <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                        </form>
+                    <div id={"response-placeholder"} style={{"paddingTop": "10px"}}></div>
+                 </>
+                }
                 {adminCounter >= 7 && 
                     <form onSubmit={(e) => {e.preventDefault(); betRealScore()}} style={{marginTop: "20px"}}>
                         <div className="bet-line">

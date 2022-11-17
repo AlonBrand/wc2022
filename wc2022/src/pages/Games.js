@@ -8,7 +8,7 @@ function Games() {
   useEffect(() => {
       const getUserBets = () => {
           try{
-                  fetch("https://alon-wc22.herokuapp.com/userBets")
+                  fetch(`https://alon-wc22.herokuapp.com/userBets/${window.USER_ID}`)
                   // fetch(`http://127.0.0.1:5000/userBets/${window.USER_ID}`)
                   .then((response) => response.json()
                   .then((data) => {

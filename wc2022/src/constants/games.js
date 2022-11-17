@@ -393,7 +393,7 @@ export const games =
         {
             id: 25,
             teamA: "Belgium",
-            teamB: "Marocco",
+            teamB: "Morocco",
             date: new Date(2022, 10, 27, 15),
         },
         {
@@ -408,5 +408,127 @@ export const games =
             teamB: "Germany",
             date: new Date(2022, 10, 27, 21),
         },
+        {
+            id: 28,
+            teamA: "Cameroon",
+            teamB: "Serbia",
+            date: new Date(2022, 10, 28, 12),
+        },
+        {
+            id: 29,
+            teamA: "Korea",
+            teamB: "Ghana",
+            date: new Date(2022, 10, 28, 15),
+        },
+        {
+            id: 30,
+            teamA: "Brazil",
+            teamB: "Switzerland",
+            date: new Date(2022, 10, 28, 18),
+        },
+        {
+            id: 31,
+            teamA: "Portugal",
+            teamB: "Uruguay",
+            date: new Date(2022, 10, 28, 21),
+        },
+        {
+            id: 32,
+            teamA: "Netherlands",
+            teamB: "Qatar",
+            date: new Date(2022, 10, 29, 17),
+        },
+        {
+            id: 33,
+            teamA: "Ecuador",
+            teamB: "Senegal",
+            date: new Date(2022, 10, 29, 17),
+        },
+        {
+            id: 34,
+            teamA: "Wales",
+            teamB: "England",
+            date: new Date(2022, 10, 29, 21),
+        },
+        {
+            id: 35,
+            teamA: "Iran",
+            teamB: "United States",
+            date: new Date(2022, 10, 29, 21),
+        },
 
+        {
+            id: 36,
+            teamA: "Australia",
+            teamB: "Denmark",
+            date: new Date(2022, 10, 30, 17),
+        },
+        {
+            id: 37,
+            teamA: "Tunisia",
+            teamB: "France",
+            date: new Date(2022, 10, 30, 17),
+        },
+        {
+            id: 38,
+            teamA: "Poland",
+            teamB: "Argentina",
+            date: new Date(2022, 10, 30, 21),
+        },
+        {
+            id: 39,
+            teamA: "Saudi Arabia",
+            teamB: "Mexico",
+            date: new Date(2022, 10, 30, 21),
+        },
+
+        {
+            id: 40,
+            teamA: "Croatia",
+            teamB: "Belgium",
+            date: new Date(2022, 11, 1, 17),
+        },
+        {
+            id: 41,
+            teamA: "Canada",
+            teamB: "Morocco",
+            date: new Date(2022, 11, 1, 17),
+        },
+        {
+            id: 42,
+            teamA: "Japam",
+            teamB: "Spain",
+            date: new Date(2022, 11, 1, 21),
+        },
+        {
+            id: 43,
+            teamA: "Costa Rica",
+            teamB: "Germany",
+            date: new Date(2022, 11, 1, 21),
+        },
+
+        {
+            id: 44,
+            teamA: "Ghana",
+            teamB: "Uruguay",
+            date: new Date(2022, 11, 2, 17),
+        },
+        {
+            id: 45,
+            teamA: "Korea",
+            teamB: "Portugal",
+            date: new Date(2022, 11, 2, 17),
+        },
+        {
+            id: 46,
+            teamA: "Serbia",
+            teamB: "Switzerland",
+            date: new Date(2022, 11, 2, 21),
+        },
+        {
+            id: 47,
+            teamA: "Cameroon",
+            teamB: "Brazil",
+            date: new Date(2022, 11, 2, 21),
+        },
     ]

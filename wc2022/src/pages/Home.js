@@ -46,7 +46,8 @@ function Home() {
                         "display":"flex",
                         "flexDirection":"row",
                         "justifyContent":"space-around",
-                        "paddingTop": "15px"
+                        "paddingTop": "15px",
+                        "text-align": "center"
                     }}
                 >
                     <div style={{justifyContent: "center"}}>
@@ -61,7 +62,7 @@ function Home() {
                         />
                         <h4 style={{"paddingTop": "5px"}}>{game?.teamA}</h4>
                     </div>
-                        {/* <h3 onClick={increaseAdminCount} style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3> */}
+                        <h3 style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
                     
                     <div>
                     <ReactCountryFlag

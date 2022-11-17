@@ -18,8 +18,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
             body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB, userId: window.USER_ID }),
         };
         try {
-            let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);
-            // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
+            // let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);
+            let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
@@ -27,6 +27,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
             msg = "Faild to send bet, please try again"
         }
         document.getElementById("response-placeholder").innerText = msg;
+        document.getElementById("response-placeholder").display = 'block'
     }
 
     const betRealScore = async () => {
@@ -37,8 +38,8 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
             body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB, userId: window.USER_ID}),
         };
         try {
-            let response = await fetch("http://127.0.0.1:5000/games/bet-real-score", requestOptions);
-            // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
+            // let response = await fetch("http://127.0.0.1:5000/games/bet-real-score", requestOptions);
+            let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
@@ -154,7 +155,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         <br></br>
                         {getDateTime()}
                         {/* <br></br> */}
-                        {getScoreGameEnd()}
+                        {/* {getScoreGameEnd()} */}
                         <br></br>
                         {
                             info !== undefined && 
@@ -199,8 +200,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                     </form>
                 }
-                {!isAvailableGame && <h3 style={{padding: "10px", marginBottom: "20px"}}>Game is not available!</h3>}
-                <div id={"response-placeholder"} style={{"paddingTop": "10px"}}></div>
+                <div id={"response-placeholder"} style={{"paddingTop": "10px", "display":"none"}}></div>
         </div>
     )
 }

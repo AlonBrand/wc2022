@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { flagsPaths, games } from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
 import ReactCountryFlag from "react-country-flag"
@@ -6,6 +6,29 @@ import "../App.css";
 
 function Home() {
   const [isEmptyDay, setIsEmptyDay] = useState(true);
+  const [winningTeam, setWinningTeam] = useState()
+  const [topScorer, setTopScorer] = useState()
+
+  useEffect(() => {
+    const getSideBets = () => {
+        try{
+            if (winningTeam === undefined || topScorer === undefined) {
+                fetch(`https://alon-wc22.herokuapp.com/get-side-bets/${window.USER_ID}`)
+                // fetch(`http://127.0.0.1:5000/get-side-bets/${window.USER_ID}`)
+                .then((response) => response.json()
+                .then((data) => {
+                    console.log(data)
+                    setWinningTeam(()=>data?.winningTeam)
+                    setTopScorer(()=>data?.topScorer)
+                }));
+            }
+        } catch(e) {
+            console.log(e)
+        }
+    }
+    getSideBets();
+}, []);
+
   const getHomeContent = () => {
     return (
       <>
@@ -87,6 +110,16 @@ function Home() {
     <>
       {/* <h1 className='pageTitle'>World Cup 2022</h1> */}
       <img src={fifaLogo}/>
+      {
+        winningTeam !== undefined && topScorer !== undefined && window.USER_ID !== undefined &&
+        <div style={{margin: "10px 0 10px 0", textAlign: "center"}}>
+          <h2> Your Side Bets</h2>
+          <br/>
+          <h4>{`Winning Team: ${winningTeam}`}</h4>
+          <br/>
+          <h4>{`Top Scorer: ${topScorer}`}</h4>
+        </div>
+      }
       <h2 className='pageTitle' style={{padding: "20px" }}>Today's Matches</h2>
       {
         games && getHomeContent()

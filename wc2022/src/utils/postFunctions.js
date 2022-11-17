@@ -31,7 +31,8 @@ export const postSignUp = async ({ name, password, updateConnectedUserName, setI
     }
 };
 
-export const postLogIn = async ({ name, password, updateConnectedUserName, setIsConnect, closeModal }) => {
+export const postLogIn = async ({ name, password, updateConnectedUserName, setIsConnect, closeModal, setPostInProgress }) => {
+    setPostInProgress(()=>true);
     const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,6 +43,7 @@ export const postLogIn = async ({ name, password, updateConnectedUserName, setIs
         // let response = await fetch("http://127.0.0.1:5000/log-in", requestOptions);
         response.json()
             .then((data) => {
+                setPostInProgress(()=>false);
                 console.log(data)
                 console.log(data?.msg)
                 if(data?.msg === 'User connected') {

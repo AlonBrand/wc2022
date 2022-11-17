@@ -11,7 +11,7 @@ function Home() {
       <>
         {
           Object.values(games)?.map((game, index) => {
-            if (new Date().getDay() === game?.date?.getDay()) {
+            if (new Date().getDate() === game?.date?.getDate()) {
               if(isEmptyDay === true) setIsEmptyDay(()=>false)
               return (
                 <div key={index} className="game-tab-container" style={{ margin: "30px", width: "auto" }}>

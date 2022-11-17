@@ -34,10 +34,19 @@ function Navbar(props) {
     }
 
     const handleDisconnect = () => {
-        setModalTitle("Yes");
+        setModalTitle("log-out");
         setModalIsOpen(true);
-        props.setIsConnected(()=>false);
     };
+
+    const handleLogOut = () => {
+        setModalIsOpen(false)
+        props.setIsConnected(()=>false);
+        window.USER_ID = undefined;
+    }
+
+    const handleCancelLogOut = () => {
+        setModalIsOpen(false)
+    }
 
     const closeModal = () => {
         setModalIsOpen(false);
@@ -72,6 +81,8 @@ function Navbar(props) {
                 modalIsOpen={modalIsOpen}
                 closeModal={closeModal}
                 handleSubmit={handleSubmit}
+                handleLogOut={handleLogOut}
+                handleCancelLogOut={handleCancelLogOut}
                 title={modalTitle}
                 postInProgress={postInProgress}
             />

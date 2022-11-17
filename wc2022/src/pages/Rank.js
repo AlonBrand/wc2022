@@ -8,38 +8,21 @@ function Rank() {
     useEffect(() => {
         const getUsers = () => {
             try{
-                // if (users === undefined) {
-                //     // fetch("https://alon-wc22.herokuapp.com/users")
-                //     fetch("http://127.0.0.1:5000/users")
-                //     .then((response) => response.json()
-                //     .then((data) => {
-                //         console.log(data)
-                //         setUsers(()=> data?.users?.map((user) => {
-                //             return {
-                //                 name: user[1],
-                //                 points: user[3]
-                //             }
-                //          }
-                //         )?.sort((a, b) => b?.points - a?.points))
-                //     }));
-                // }
-                setUsers(()=> {
-                    return [
-                        {
-                            name: "Yaakov",
-                            points: 3
-                        },
-                        {
-                            name: "Eilat",
-                            points: 56
-                        },
-                        {
-                            name: "yosef",
-                            points: 12
-                        }
-                    ].sort((a, b) => b?.points - a?.points)
-                }) 
-                    
+                if (users === undefined) {
+                    fetch("https://alon-wc22.herokuapp.com/users")
+                    // fetch("http://127.0.0.1:5000/users")
+                    .then((response) => response.json()
+                    .then((data) => {
+                        console.log(data)
+                        setUsers(()=> data?.users?.map((user) => {
+                            return {
+                                name: user[1],
+                                points: user[3]
+                            }
+                         }
+                        )?.sort((a, b) => b?.points - a?.points))
+                    }));
+                }
             } catch(e) {
                 console.log(e)
             }

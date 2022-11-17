@@ -18,7 +18,7 @@ export const postSignUp = async ({ name, password, updateConnectedUserName, setI
                 const element = document.getElementById("login-placeHolder");
                 element.innerHTML = '<h5> User name already exist! </h5>';
             }
-            else {
+            else if(data?.msg === 'User Connected'){
                 window.USER_ID = data?.user_id;
                 updateConnectedUserName(`Hi, ${data?.user_name}`)
                 setIsConnect(() => true);
@@ -45,9 +45,14 @@ export const postLogIn = async ({ name, password, updateConnectedUserName, setIs
                 console.log(data)
                 console.log(data?.msg)
                 if(data?.msg === 'User connected') {
+                    window.USER_ID = data?.user_id;
                     updateConnectedUserName(`Hi, ${data?.user_name}`);
                     setIsConnect(()=>true);
                     closeModal()
+                }
+                else if(data?.msg === "Wrong user name or password!") {
+                    const element = document.getElementById("login-placeHolder");
+                    element.innerHTML = '<h5>Wrong user name or password!</h5>';
                 }
             });
     } catch (e) {

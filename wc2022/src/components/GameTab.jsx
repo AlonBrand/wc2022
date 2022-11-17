@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./GameTab.css";
 import { flagsPaths } from "../constants/games";
+import checkmark from "../images/checmmark.png";
 import ReactCountryFlag from "react-country-flag"
 
-export const GameTab = ({ id, teamA, teamB, date, info }) => {
+export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch }) => {
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
     const [realScoreA, setRealScoreA] = useState();
@@ -11,6 +12,33 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const [adminCounter, setAdminCounter] = useState(0);
     const isAvailableGame = new Date() - date < 0;
     // const isAvailableGame = false;
+
+    const betRecivedContent = () =>{
+        return(
+            <div style={{
+                "display": "flex",
+                "alignContent": "center",
+                "flexDirection": "column",
+                "height": "100%",
+                "alignItems": "center",
+                /* justify-content: center; */
+                "fontSize": "1rem",
+                "textAlign": "center",
+                /* overflow: scroll; */
+            }}>
+                <div>
+                    <img src={checkmark} />
+                </div>
+                <div>
+                    Your bet has received! <br/>
+                    Good luck!
+                </div>
+
+            </div>
+        )
+    }
+
+     
 
     const betOnGame = async () => {
         let msg = "Server received your bet, good luck!!!"
@@ -28,11 +56,15 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
         } catch (e) {
             msg = "Faild to send bet, please try again"
         }
-        document.getElementById(`response-placeholder-${id}`).innerText = msg;
-        document.getElementById(`response-placeholder-${id}`).display = 'block';
-        setTimeout(() => {
-            document.getElementById(`response-placeholder-${id}`).innerText = '';
-        }, 4000);
+        // document.getElementById(`response-placeholder-${id}`).innerText = msg;
+
+        // document.getElementById(`response-placeholder-${id}`).display = 'block';
+        setModalContent(betRecivedContent(), "Nice bet bro!");
+        setModalOpen(true);
+        setReFetch(prev => !prev);
+        // setTimeout(() => {
+        //     document.getElementById(`response-placeholder-${id}`).innerText = '';
+        // }, 4000);
     }
 
     const betRealScore = async () => {

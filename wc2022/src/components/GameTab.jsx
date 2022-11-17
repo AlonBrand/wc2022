@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./GameTab.css";
 import { flagsPaths } from "../constants/games";
+import checkmark from "../images/checmmark.png";
 import ReactCountryFlag from "react-country-flag"
 
-export const GameTab = ({ id, teamA, teamB, date, info }) => {
+export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch }) => {
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
     const [realScoreA, setRealScoreA] = useState();
@@ -11,6 +12,33 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     const [adminCounter, setAdminCounter] = useState(0);
     const isAvailableGame = new Date() - date < 0;
     // const isAvailableGame = false;
+
+    const betRecivedContent = () =>{
+        return(
+            <div style={{
+                "display": "flex",
+                "alignContent": "center",
+                "flexDirection": "column",
+                "height": "100%",
+                "alignItems": "center",
+                /* justify-content: center; */
+                "fontSize": "1rem",
+                "textAlign": "center",
+                /* overflow: scroll; */
+            }}>
+                <div>
+                    <img src={checkmark} />
+                </div>
+                <div>
+                    Your bet has received! <br/>
+                    Good luck!
+                </div>
+
+            </div>
+        )
+    }
+
+     
 
     const betOnGame = async () => {
         let msg = "Server received your bet, good luck!!!"
@@ -28,11 +56,15 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
         } catch (e) {
             msg = "Faild to send bet, please try again"
         }
-        document.getElementById(`response-placeholder-${id}`).innerText = msg;
-        document.getElementById(`response-placeholder-${id}`).display = 'block';
-        setTimeout(() => {
-            document.getElementById(`response-placeholder-${id}`).innerText = '';
-        }, 4000);
+        // document.getElementById(`response-placeholder-${id}`).innerText = msg;
+
+        // document.getElementById(`response-placeholder-${id}`).display = 'block';
+        setModalContent(betRecivedContent(), "Nice bet bro!");
+        setModalOpen(true);
+        setReFetch(prev => !prev);
+        // setTimeout(() => {
+        //     document.getElementById(`response-placeholder-${id}`).innerText = '';
+        // }, 4000);
     }
 
     const betRealScore = async () => {
@@ -175,27 +207,29 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                     </div> 
                 :
                  <>
-                    {getFlagIcon()}
-                    <br></br>
-                    {getDateTime()}
-                    <br></br>
-                    {
-                        info !== undefined && 
-                        <br></br> &&
-                        <p>{info}</p>
+                    <div style={{"paddingTop":"2px"}}>
+                        {getFlagIcon()}
+                        <br></br>
+                        {getDateTime()}
+                        <br></br>
+                        {
+                            info !== undefined && 
+                            <br></br> &&
+                            <p>{info}</p>
 
-                    }
-                    <br></br>
-                        <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
-                            <div className="bet-line">
-                                <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
-                                <input id="right-bet"  style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
-                            </div>
-                            <br></br>
-                            <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
-                        </form>
-                    <div id={`response-placeholder-${id}`} ></div>
-                    <div id={`your-bet-placeholder-${id}`} ></div>
+                        }
+                        <br></br>
+                            <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
+                                <div className="bet-line">
+                                    <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
+                                    <input id="right-bet"  style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
+                                </div>
+                                <br></br>
+                                <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                            </form>
+                        <div id={`response-placeholder-${id}`} ></div>
+                        <div id={`your-bet-placeholder-${id}`} ></div>
+                    </div>
                  </>
                 }
                 {adminCounter >= 7 && 

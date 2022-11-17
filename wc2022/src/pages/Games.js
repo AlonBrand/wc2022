@@ -4,7 +4,12 @@ import { GameTab } from '../components/GameTab';
 import { games } from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
 
-function Games() {
+
+function Games(
+  prop
+) {
+  const {setModalContent, setOpen, modalState} = prop;
+  const [reFetch, setReFetch] = useState('')
   useEffect(() => {
       const getUserBets = () => {
           try{
@@ -24,7 +29,9 @@ function Games() {
           }
       }
       getUserBets();
-  }, []);
+  }, [reFetch]);
+
+
 
   const getGamesContent = () => {
     return (
@@ -32,7 +39,17 @@ function Games() {
         {
           Object.values(games)?.map((game) => {
             return(
-                <GameTab key={game.id} id={game.id} teamA={game.teamA} teamB={game.teamB} date={game.date} info={game.info}/>
+                <GameTab 
+                    key={game.id} 
+                    id={game.id} 
+                    teamA={game.teamA} 
+                    teamB={game.teamB} 
+                    date={game.date} 
+                    info={game.info} 
+                    setModalContent={setModalContent} 
+                    setModalOpen={setOpen}
+                    setReFetch={setReFetch}
+                />
             )
           })
         }
@@ -41,6 +58,7 @@ function Games() {
   }
 
   return (
+
     <>
       <div>
         <img src={fifaLogo}/>

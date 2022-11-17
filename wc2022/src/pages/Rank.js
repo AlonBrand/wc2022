@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import fifaLogo from "../images/fifa-logo.svg"
 import "../App.css";
 
 
@@ -32,7 +33,8 @@ function Rank() {
 
     return (
         <div className="rank">
-            <h1 style={{"paddingTop": "50px", "paddingBottom": "41.5px"}}>Tournament Table</h1>
+            <img src={fifaLogo}/>
+            <h1 style={{"paddingTop": "20px", "paddingBottom": "20px"}}>Tournament Table</h1>
             <table className="rank-table">
                 <thead>
                     <tr>

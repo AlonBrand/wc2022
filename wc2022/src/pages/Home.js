@@ -1,44 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { flagsPaths, games } from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
-import { GameTab } from '../components/GameTab';
 import ReactCountryFlag from "react-country-flag"
 import "../App.css";
 
 function Home() {
-  // const [currentRank, setCurrentRank] = useState();
-  // const [currentPoints, setCurrentPoints] = useState();
-  // const [liveScores, setLiveScores] = useState();
-
-  // useEffect(() => {
-  //   setCurrentRank(2)
-  // }, []);
-
-  // useEffect(() => {
-  //   setCurrentPoints(4)
-  // }, []);
-
-  // const headers = {
-  //   'X-RapidAPI-Key': '4d20a10640mshcb44d59c18b0698p17d664jsn888f114ee37c',
-  //   'X-RapidAPI-Host': 'livescore6.p.rapidapi.com'
-  // }
-
-  // useEffect(() => {
-  //   if(liveScores === undefined) {
-  //     fetch('https://livescore6.p.rapidapi.com/matches/v2/list-live', { headers })
-  //       .then((response) => response.json())
-  //       .then((data) => setLiveScores(data));
-  //   }
-  // }, [])
-
-  // console.log(liveScores)
-
+  const [isEmptyDay, setIsEmptyDay] = useState(true);
   const getHomeContent = () => {
     return (
       <>
         {
           Object.values(games)?.map((game, index) => {
             if (new Date().getDay() === game?.date?.getDay()) {
+              if(isEmptyDay === true) setIsEmptyDay(()=>false)
               return (
                 <div key={index} className="game-tab-container" style={{ margin: "30px", width: "auto" }}>
                   <div 
@@ -77,36 +51,10 @@ function Home() {
                         <h4 style={{"paddingTop": "5px"}}>{game?.teamB}</h4>
                     </div>
                 </div>
-                  {/* {
-                    info !== undefined &&
-                    <br></br> &&
-                    <p>{info}</p>
-
-                  } */}
                   <br></br>
                   {
                     getDateTime(game?.date)
                   }
-                  {/* <form onSubmit={(e) => { e.preventDefault(); betOnGame() }}>
-                    <div className="bet-line">
-                      <input id="left-bet" style={{ height: "30px", textAlign: "center" }} type="number" placeholder={teamA} onChange={(e) => setScoreA(e.target.value)}></input>
-                      <input id="right-bet" style={{ height: "30px", textAlign: "center" }} type="number" placeholder={teamB} onChange={(e) => setScoreB(e.target.value)}></input>
-                    </div>
-                    <br></br>
-                    <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
-                  </form> */}
-                  {/* {adminCounter >= 7 &&
-                    <form onSubmit={(e) => { e.preventDefault(); betRealScore() }} style={{ marginTop: "20px" }}>
-                      <div className="bet-line">
-                        <input id="left-bet" style={{ height: "30px", textAlign: "center" }} type="number" placeholder={teamA} onChange={(e) => setScoreA(e.target.value)}></input>
-                        <input id="right-bet" style={{ height: "30px", textAlign: "center" }} type="number" placeholder={teamB} onChange={(e) => setScoreB(e.target.value)}></input>
-                      </div>
-                      <br></br>
-                      <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
-                    </form>
-                  } */}
-                  {/* {!isAvailableGame && <h3 style={{ padding: "10px", marginBottom: "20px" }}>Game is not available!</h3>} */}
-                  {/* <div id={"response-placeholder"} style={{ "paddingTop": "10px" }}></div> */}
                 </div>
               )
             }
@@ -142,6 +90,9 @@ function Home() {
       <h2 className='pageTitle' style={{padding: "20px" }}>Today's Matches</h2>
       {
         games && getHomeContent()
+      }
+      {
+        isEmptyDay && <h3 style={{"textAlign": "center"}}>No Matches Today!</h3>
       }
     </>
   )

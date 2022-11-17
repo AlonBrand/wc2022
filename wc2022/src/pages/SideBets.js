@@ -86,18 +86,20 @@ const disableSend = () => winningTeam === undefined || topScorer === undefined;
 return (
     <div>
         <img src={fifaLogo}/>
+        <h1 style={{"textAlign": "center", "paddingTop": "20px", "paddingBottom": "20px"}}>Side Bets</h1>
         <div style={{margin: "0px 20px 20px 20px"}} className="side-bets">
-            <h2 style={{marginBottom: "10px"}}> Winnig Team</h2>
-            <Select 
+            <h3 style={{marginBottom: "10px"}}> Winning Team</h3>
+            <Select
+                styles={{"paddingBottom": "10px"}} 
                 options={winningTeamOptions} 
                 onChange={(e) => handleWinningTeam(e)}
             />
-            <h2 style={{marginBottom: "10px", marginTop: "20px"}}>Top Scorer</h2>
+            <h3 style={{marginBottom: "10px", marginTop: "20px"}}>Top Scorer</h3>
             <Select 
                 options={topScorerOptions} 
                 onChange={(e) => handleTopScorer(e)}
             />
-            <div style={{textAlign: "center", marginTop: "30px"}}> 
+            <div style={{textAlign: "center", marginTop: "30px", "marginBotto": "50px"}}> 
                 <button id="side-bet-button" style={{marginBottom: "20px", height: "50px", width: "100px", borderRadius: "4px"}} disabled={disableSend()} onClick={betOnGame}>Send</button>
                 <div id='side-bets-placeholder'></div>
             </div>

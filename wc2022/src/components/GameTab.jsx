@@ -51,7 +51,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
     }
     
     const validateInput = () => {
-        if(scoreA === undefined || scoreB === undefined || scoreA < 0 || scoreB < 0) return true;
+        if(scoreA === undefined || scoreB === undefined || scoreA < 0 || scoreB < 0 || scoreA === '' || scoreB === '') return true;
         return false;
     }
     const getFlagIcon = () => {
@@ -165,7 +165,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
 
                         }
                         <br></br>
-                        <h3 style={{paddingBottom: "15px"}}>Game Finished!</h3> 
+                        <h3 style={{paddingBottom: "15px"}}>No more bet kapara!</h3> 
                     </div> 
                 :
                  <>
@@ -183,7 +183,7 @@ export const GameTab = ({ id, teamA, teamB, date, info }) => {
                         <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
                             <div className="bet-line">
                                 <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
-                                <input id="right-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
+                                <input id="right-bet"  style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
                             </div>
                             <br></br>
                             <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>

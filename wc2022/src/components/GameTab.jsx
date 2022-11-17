@@ -41,7 +41,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
      
 
     const betOnGame = async () => {
-        let msg = "Server received your bet, good luck!!!"
+        let msg = betRecivedContent()
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -53,15 +53,18 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
+            setModalContent(msg, "Nice bet bro!");
+            setModalOpen(true);
+            setReFetch(prev => !prev);
         } catch (e) {
             msg = "Faild to send bet, please try again"
+            setModalContent(msg, "Nice bet bro!");
+            setModalOpen(true);
         }
         // document.getElementById(`response-placeholder-${id}`).innerText = msg;
 
         // document.getElementById(`response-placeholder-${id}`).display = 'block';
-        setModalContent(betRecivedContent(), "Nice bet bro!");
-        setModalOpen(true);
-        setReFetch(prev => !prev);
+ 
         // setTimeout(() => {
         //     document.getElementById(`response-placeholder-${id}`).innerText = '';
         // }, 4000);

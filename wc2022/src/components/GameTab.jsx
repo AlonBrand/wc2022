@@ -207,27 +207,29 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                     </div> 
                 :
                  <>
-                    {getFlagIcon()}
-                    <br></br>
-                    {getDateTime()}
-                    <br></br>
-                    {
-                        info !== undefined && 
-                        <br></br> &&
-                        <p>{info}</p>
+                    <div style={{"paddingTop":"2px"}}>
+                        {getFlagIcon()}
+                        <br></br>
+                        {getDateTime()}
+                        <br></br>
+                        {
+                            info !== undefined && 
+                            <br></br> &&
+                            <p>{info}</p>
 
-                    }
-                    <br></br>
-                        <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
-                            <div className="bet-line">
-                                <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
-                                <input id="right-bet"  style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
-                            </div>
-                            <br></br>
-                            <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
-                        </form>
-                    <div id={`response-placeholder-${id}`} ></div>
-                    <div id={`your-bet-placeholder-${id}`} ></div>
+                        }
+                        <br></br>
+                            <form onSubmit={(e) => {e.preventDefault(); betOnGame()}}>
+                                <div className="bet-line">
+                                    <input id="left-bet" style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamA} onChange={(e)=>setScoreA(e.target.value)}></input>
+                                    <input id="right-bet"  style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
+                                </div>
+                                <br></br>
+                                <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                            </form>
+                        <div id={`response-placeholder-${id}`} ></div>
+                        <div id={`your-bet-placeholder-${id}`} ></div>
+                    </div>
                  </>
                 }
                 {adminCounter >= 7 && 

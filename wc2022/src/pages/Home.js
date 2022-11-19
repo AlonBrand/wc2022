@@ -27,7 +27,7 @@ function Home() {
         }
     }
     getSideBets();
-}, []);
+}, [window.USER_ID]);
 
   const getHomeContent = () => {
     return (

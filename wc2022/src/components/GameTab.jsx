@@ -75,7 +75,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
             body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: realScoreA, scoreB: realScoreB }),
         };
         try {
-            let response = await fetch("https://alon-wc22.herokuapp.com/bet-real-score", requestOptions);
+            let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-real-score", requestOptions);
             // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));

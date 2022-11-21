@@ -4,7 +4,6 @@ import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
 import LoginModal from "./LoginModal";
 import * as FaIcons from "react-icons/fa";
-import * as FiIcons from "react-icons/fi";
 import * as AiIcons from "react-icons/ai";
 import * as ImIcons from "react-icons/im";
 import "./Navbar.css";

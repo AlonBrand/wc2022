@@ -3,6 +3,8 @@ import "./GameTab.css";
 import { flagsPaths } from "../constants/games";
 import checkmark from "../images/checmmark.png";
 import ReactCountryFlag from "react-country-flag"
+import { users } from "../constants/users";
+import { BiBarChart } from "react-icons/bi";
 import { useEffect } from "react";
 
 
@@ -20,7 +22,6 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     }, [])
 
     interval_id = setInterval(() => {
-        console.log("inside")
         setIsAvailableGame(new Date() < date);
     }, 10000);
 
@@ -189,7 +190,53 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                 </div>
             </>
         )
+    }
 
+    const getGameTable = (data) => {
+        console.log(data)
+        clearInterval(interval_id);
+        return (
+            <table className="rank-table rank-table-tab ">
+            <thead>
+                <tr>
+                    <th style={{width: "50px"}}>Name</th>
+                    <th style={{width: "50px"}}>Bet</th>
+                </tr>
+            </thead>
+            <tbody>
+            {
+                data?.map((betRow, index) => {
+                    const user_id = betRow[1]
+                    const score_a = betRow[3]
+                    const score_b = betRow[4]
+                    if(user_id !== undefined && score_a !== undefined && score_b !== undefined)
+                    {
+                        return (
+                            <tr key={`${index}`}>
+                                <td>{users[user_id]}</td>
+                                <td>{`${score_a} - ${score_b}`}</td>
+                            </tr>
+                        )
+                    }
+                })
+            }
+            </tbody>
+        </table>
+        )
+    }
+
+    const showGameBets = async () => {
+        try {
+            // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-real-score", requestOptions);
+            let response = await fetch(`http://127.0.0.1:5000/get-bets/${id}`);
+            let response_data = response.json()
+            .then((data) => {
+                setModalContent(getGameTable(data?.game_bets),`${teamA} - ${teamB} Bets:`);
+                setModalOpen(true);
+            })
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return (
@@ -213,6 +260,9 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
 
                         }
                         <br></br>
+                        {
+                            <BiBarChart style={{float: "right", height: "25px", width: "25px", marginRight: "10px"}} onClick={showGameBets}/>
+                        }
                         <h3 >No more bet kapara!</h3> 
                         {
                             serverScoreA !== undefined && serverScoreB !== undefined ? 

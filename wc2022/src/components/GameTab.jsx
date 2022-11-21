@@ -227,8 +227,8 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
 
     const showGameBets = async () => {
         try {
-            // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-real-score", requestOptions);
-            let response = await fetch(`http://127.0.0.1:5000/get-bets/${id}`);
+            let response = await fetch(`https://alon-wc22.herokuapp.com/get-bets/${id}`, requestOptions);
+            // let response = await fetch(`http://127.0.0.1:5000/get-bets/${id}`);
             let response_data = response.json()
             .then((data) => {
                 setModalContent(getGameTable(data?.game_bets),`${teamA} - ${teamB} Bets:`);

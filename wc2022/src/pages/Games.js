@@ -13,18 +13,25 @@ function Games(prop) {
   useEffect(() => {
       const getUserBets = () => {
           try{
-                  fetch(`https://alon-wc22.herokuapp.com/userBets/${window.USER_ID}`)
-                  // fetch(`http://127.0.0.1:5000/userBets/${window.USER_ID}`)
-                  .then((response) => response.json()
-                  .then((data) => {
-                    const sortedData = data?.userBets?.sort((a, b)=>a[2] - b[2]);
-                    setUserBets(sortedData);
-                    //   for(let bet of data?.userBets) {
-                    //     if(Array.isArray(bet) && bet?.length >= 4) {
-                    //       document.getElementById(`your-bet-placeholder-${bet[2]}`).innerText = `Your current bet is: ${bet[3]} - ${bet[4]}`;
-                    //       document.getElementById(`your-bet-placeholder-${bet[2]}`).display = 'block';
-                    //   }
-                    // }
+                window.BETS = [];
+                fetch(`https://alon-wc22.herokuapp.com/userBets/${window.USER_ID}`)
+                // fetch(`http://127.0.0.1:5000/userBets/${window.USER_ID}`)
+                .then((response) => response.json()
+                .then((data) => {
+                  const sortedData = data?.userBets?.sort((a, b)=>a[2] - b[2]);
+                  setUserBets(sortedData);
+                    for(let bet of data?.userBets) {
+                      console.log(bet)
+                      if(Array.isArray(bet) && bet?.length >= 4) {
+                        const object = Object.assign({id: bet[2], value: `Your current bet is: ${bet[3]} - ${bet[4]}`})
+                        window.BETS.push(object);
+                        // const element = document.getElementById(`your-bet-placeholder-${bet[2]}`);
+                        // if (element) {
+                        //   element.innerText = `Your current bet is: ${bet[3]} - ${bet[4]}`;
+                        //   element.display = 'block';
+                        // }
+                    }
+                  }
               }))
           } catch(e) {
               console.log(e)
@@ -51,8 +58,9 @@ function Games(prop) {
                     setModalContent={setModalContent} 
                     setModalOpen={setOpen}
                     setReFetch={setReFetch}
-                    serverScoreA={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[index][3] : undefined}
-                    serverScoreB={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[index][4] : undefined}
+                    // serverScoreA={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[index][3] : undefined}
+                    // serverScoreB={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[index][4] : undefined}
+                    // serverGameID={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[i][2] : undefined}
                 />
             )
           })

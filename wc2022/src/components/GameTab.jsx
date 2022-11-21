@@ -8,7 +8,7 @@ import { BiBarChart } from "react-icons/bi";
 import { useEffect } from "react";
 
 
-export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, serverScoreA, serverScoreB }) => {
+export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, serverScoreA, serverScoreB, serverGameID }) => {
     let interval_id;
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
@@ -193,7 +193,6 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     }
 
     const getGameTable = (data) => {
-        console.log(data)
         clearInterval(interval_id);
         return (
             <table className="rank-table rank-table-tab ">
@@ -227,7 +226,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
 
     const showGameBets = async () => {
         try {
-            let response = await fetch(`https://alon-wc22.herokuapp.com/get-bets/${id}`, requestOptions);
+            let response = await fetch(`https://alon-wc22.herokuapp.com/get-bets/${id}`);
             // let response = await fetch(`http://127.0.0.1:5000/get-bets/${id}`);
             let response_data = response.json()
             .then((data) => {
@@ -264,9 +263,13 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                             <BiBarChart style={{float: "right", height: "25px", width: "25px", marginRight: "10px"}} onClick={showGameBets}/>
                         }
                         <h3 >No more bet kapara!</h3> 
-                        {
-                            serverScoreA !== undefined && serverScoreB !== undefined ? 
+                        {/* {
+                            serverGameID === id && serverScoreA !== undefined && serverScoreB !== undefined ? 
                             `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
+                        } */}
+                        {
+                            // window.BETS !== undefined ? 
+                            // <div id={`your-bet-placeholder-${id}`}></div>
                         }
                     </div> 
                 :
@@ -292,8 +295,11 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                                 <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                             </form>
                             {
-                                serverScoreA !== undefined && serverScoreB !== undefined ? 
-                                `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
+                                // serverScoreA !== undefined && serverScoreB !== undefined ? 
+                                // `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
+                                Array.isArray(window.BETS) && window.BETS.map((bet) => {
+                                    if(bet.id === id) return bet.value
+                                })
                             }
                     </div>
                  </>

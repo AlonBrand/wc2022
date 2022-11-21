@@ -238,6 +238,14 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
         }
     }
 
+    const getBetString = () => {
+        return (
+            Array.isArray(window.BETS) && window.BETS.map((bet) => {
+                if(bet.id === id) return bet.value
+            })
+        )
+    }
+
     return (
             <div className="game-tab-container" style={{marginBottom: "30px"}}>       
                 {!isAvailableGame ? 
@@ -268,8 +276,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                             `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
                         } */}
                         {
-                            // window.BETS !== undefined ? 
-                            // <div id={`your-bet-placeholder-${id}`}></div>
+                            getBetString()
                         }
                     </div> 
                 :
@@ -297,9 +304,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                             {
                                 // serverScoreA !== undefined && serverScoreB !== undefined ? 
                                 // `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
-                                Array.isArray(window.BETS) && window.BETS.map((bet) => {
-                                    if(bet.id === id) return bet.value
-                                })
+                                getBetString()
                             }
                     </div>
                  </>

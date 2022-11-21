@@ -3,15 +3,26 @@ import "./GameTab.css";
 import { flagsPaths } from "../constants/games";
 import checkmark from "../images/checmmark.png";
 import ReactCountryFlag from "react-country-flag"
+import { useEffect } from "react";
 
-export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch }) => {
+
+export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, serverScoreA, serverScoreB }) => {
+    let interval_id;
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
     const [realScoreA, setRealScoreA] = useState();
     const [realScoreB, setRealScoreB] = useState();
     const [adminCounter, setAdminCounter] = useState(0);
-    const isAvailableGame = new Date() - date < 0;
-    // const isAvailableGame = false;
+    const [isAvailableGame, setIsAvailableGame] = useState(new Date() < date);
+
+    useEffect(() => {
+        return clearInterval(interval_id);
+    }, [])
+
+    interval_id = setInterval(() => {
+        console.log("inside")
+        setIsAvailableGame(new Date() < date);
+    }, 10000);
 
     const betRecivedContent = () =>{
         return(
@@ -203,7 +214,10 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                         }
                         <br></br>
                         <h3 >No more bet kapara!</h3> 
-                        <div style={{paddingBottom: "15px"}} id={`your-bet-placeholder-${id}`} ></div>
+                        {
+                            serverScoreA !== undefined && serverScoreB !== undefined ? 
+                            `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
+                        }
                     </div> 
                 :
                  <>
@@ -227,8 +241,10 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                                 <br></br>
                                 <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                             </form>
-                        <div id={`response-placeholder-${id}`} ></div>
-                        <div id={`your-bet-placeholder-${id}`} ></div>
+                            {
+                                serverScoreA !== undefined && serverScoreB !== undefined ? 
+                                `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
+                            }
                     </div>
                  </>
                 }

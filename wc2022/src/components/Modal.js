@@ -13,10 +13,8 @@ export default function Modal(props) {
   const {open, setOpen, onClose, modalTitle, modalText} = props;
 
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    console.log(modalText)
 
 
-  console.log(open)
   return (
     <div>
       <Dialog

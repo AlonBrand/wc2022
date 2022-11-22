@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./GameTab.css";
 import { flagsPaths } from "../constants/games";
+import  Timer  from '../components/Timer/Timer';
 import checkmark from "../images/checmmark.png";
 import ReactCountryFlag from "react-country-flag"
 
@@ -184,6 +185,18 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
 
     }
 
+    const gameTimer = () => {
+        
+        if(!isAvailableGame) return;
+
+        return  (
+            <Timer
+                gameDate={date}
+            />
+        )
+
+    }
+
     return (
             <div className="game-tab-container" style={{marginBottom: "30px"}}>       
                 {!isAvailableGame ? 
@@ -212,6 +225,8 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                  <>
                     <div style={{"paddingBottom":"10px"}}>
                         {getFlagIcon()}
+                        <br></br>
+                        {gameTimer()}
                         <br></br>
                         {getDateTime()}
                         <br></br>

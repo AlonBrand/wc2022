@@ -245,16 +245,19 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
         }
     }
 
-    const getBetString = () => {
+    const getBetString = (paddingLeft) => {
         return (
-            Array.isArray(window.BETS) && window.BETS.map((bet) => {
-                if(bet.id === id) return bet.value
-            })
+            <div style={{paddingLeft: paddingLeft !== undefined ? `${paddingLeft}px` : ""}}>
+                {
+                    Array.isArray(window.BETS) && window.BETS.map((bet) => {
+                        if(bet.id === id) return bet.value
+                    })
+                }
+            </div>
         )
     }
 
     const gameTimer = () => {
-        
         if(!isAvailableGame) return;
         // if(date - new Date() <= 1){
         //     setTimerAlert(true)
@@ -271,7 +274,20 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                 />
             </div>
         )
+    }
 
+    const getRealScoreGameEnd = () => {
+        return (
+            <div style={{fontStyle:"bold"}}>
+                {
+                    Array.isArray(window.GAMES) && window.GAMES.map((game) => {
+                        if(game.id === id && game.scoreA !== undefined && game.scoreB !== undefined) {
+                            return <h3>{game.scoreA} - {game.scoreB}</h3>
+                        } 
+                    })
+                }
+            </div>
+        )
     }
 
     return (
@@ -284,6 +300,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                     >
                         {getFlagIcon()}
                         <br></br>
+                        {getRealScoreGameEnd()}
                         {getDateTime()}
                         {/* <br></br> */}
                         {getScoreGameEnd()}
@@ -294,17 +311,16 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                             <p>{info}</p>
 
                         }
-                        <br></br>
                         {
                             <BiBarChart style={{float: "right", height: "25px", width: "25px", marginRight: "10px"}} onClick={showGameBets}/>
                         }
-                        <h3 >No more bet kapara!</h3> 
+                        <h3 style={{paddingLeft: "35px"}}>No more bet kapara!</h3> 
                         {/* {
                             serverGameID === id && serverScoreA !== undefined && serverScoreB !== undefined ? 
                             `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
                         } */}
                         {
-                            getBetString()
+                            getBetString(35)
                         }
                     </div> 
                 :
@@ -313,9 +329,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                         {getFlagIcon()}
                         <br></br>
                         {new Date().getDate() === date.getDate() ? gameTimer() : undefined}
-                        <br></br>
                         {getDateTime()}
-                        <br></br>
                         {
                             info !== undefined && 
                             <br></br> &&

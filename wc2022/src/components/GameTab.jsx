@@ -4,16 +4,30 @@ import { flagsPaths } from "../constants/games";
 import  Timer  from '../components/Timer/Timer';
 import checkmark from "../images/checmmark.png";
 import ReactCountryFlag from "react-country-flag"
+import { users } from "../constants/users";
+import { BiBarChart } from "react-icons/bi";
+import { useEffect } from "react";
 
-export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch }) => {
+
+export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, serverScoreA, serverScoreB, serverGameID }) => {
+    let interval_id;
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
     const [realScoreA, setRealScoreA] = useState();
     const [realScoreB, setRealScoreB] = useState();
     const [adminCounter, setAdminCounter] = useState(0);
     const [timerAlert, setTimerAlert] = useState(true);
-    const isAvailableGame = new Date() - date < 0;
+    // const isAvailableGame = new Date() - date < 0;
     // const isAvailableGame = false;
+    const [isAvailableGame, setIsAvailableGame] = useState(new Date() < date);
+
+    useEffect(() => {
+        return clearInterval(interval_id);
+    }, [])
+
+    interval_id = setInterval(() => {
+        setIsAvailableGame(new Date() < date);
+    }, 10000);
 
     const betRecivedContent = () =>{
         return(
@@ -183,7 +197,60 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                 </div>
             </>
         )
+    }
 
+    const getGameTable = (data) => {
+        clearInterval(interval_id);
+        return (
+            <table className="rank-table rank-table-tab ">
+            <thead>
+                <tr>
+                    <th style={{width: "50px"}}>Name</th>
+                    <th style={{width: "50px"}}>Bet</th>
+                </tr>
+            </thead>
+            <tbody>
+            {
+                data?.map((betRow, index) => {
+                    const user_id = betRow[1]
+                    const score_a = betRow[3]
+                    const score_b = betRow[4]
+                    if(user_id !== undefined && score_a !== undefined && score_b !== undefined)
+                    {
+                        return (
+                            <tr key={`${index}`}>
+                                <td>{users[user_id]}</td>
+                                <td>{`${score_a} - ${score_b}`}</td>
+                            </tr>
+                        )
+                    }
+                })
+            }
+            </tbody>
+        </table>
+        )
+    }
+
+    const showGameBets = async () => {
+        try {
+            let response = await fetch(`https://alon-wc22.herokuapp.com/get-bets/${id}`);
+            // let response = await fetch(`http://127.0.0.1:5000/get-bets/${id}`);
+            let response_data = response.json()
+            .then((data) => {
+                setModalContent(getGameTable(data?.game_bets),`${teamA} - ${teamB} Bets:`);
+                setModalOpen(true);
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    const getBetString = () => {
+        return (
+            Array.isArray(window.BETS) && window.BETS.map((bet) => {
+                if(bet.id === id) return bet.value
+            })
+        )
     }
 
     const gameTimer = () => {
@@ -228,8 +295,17 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
 
                         }
                         <br></br>
+                        {
+                            <BiBarChart style={{float: "right", height: "25px", width: "25px", marginRight: "10px"}} onClick={showGameBets}/>
+                        }
                         <h3 >No more bet kapara!</h3> 
-                        <div style={{paddingBottom: "15px"}} id={`your-bet-placeholder-${id}`} ></div>
+                        {/* {
+                            serverGameID === id && serverScoreA !== undefined && serverScoreB !== undefined ? 
+                            `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
+                        } */}
+                        {
+                            getBetString()
+                        }
                     </div> 
                 :
                  <>
@@ -255,8 +331,11 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                                 <br></br>
                                 <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
                             </form>
-                        <div id={`response-placeholder-${id}`} ></div>
-                        <div id={`your-bet-placeholder-${id}`} ></div>
+                            {
+                                // serverScoreA !== undefined && serverScoreB !== undefined ? 
+                                // `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
+                                getBetString()
+                            }
                     </div>
                  </>
                 }

@@ -341,7 +341,7 @@ export const games =
             id: 16,
             teamA: "Brazil",
             teamB: "Serbia",
-            date: new Date(2022, 10, 24, 20, 50),
+            date: new Date(2022, 10, 24, 21),
         },
         {
             id: 17,

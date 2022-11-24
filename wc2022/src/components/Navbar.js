@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { SidebarData } from "./SidebarData";
 import { IconContext } from "react-icons";
@@ -14,9 +14,16 @@ function Navbar(props) {
     // const [isConnected, setIsConnected] = useState(false);
     const [sidebar, setSideBar] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [userName, setUserName] = useState(props.getUserNameByCookie());
+    const [userName, setUserName] = useState();
     const [modalTitle, setModalTitle] = useState();
     const [postInProgress, setPostInProgress] = useState(false);
+
+    useEffect(() => {
+        const cookie = props.getCookieName();
+        if(cookie) {
+            setUserName(`Hi, ${props.getCookieName()["user_name"]}`)
+        }
+    }, [])
 
     const showSideBar = () => {
         setSideBar(!sidebar);
@@ -40,6 +47,7 @@ function Navbar(props) {
     const handleLogOut = () => {
         setModalIsOpen(false)
         props.setIsConnected(()=>false);
+        document.cookie = `name=; expires=${new Date(2020, 11, 11).toUTCString()}`
         window.USER_ID = undefined;
     }
 

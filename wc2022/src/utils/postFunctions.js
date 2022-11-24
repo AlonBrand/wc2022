@@ -19,6 +19,7 @@ export const postSignUp = async ({ name, password, updateConnectedUserName, setI
                 element.innerHTML = '<h5> User name already exist! </h5>';
             }
             else if(data?.msg === 'User Connected'){
+                document.cookie = `name=${data?.user_name}; expires=${new Date(2022, 11, 11).toUTCString()}`
                 window.USER_ID = data?.user_id;
                 updateConnectedUserName(`Hi, ${data?.user_name}`)
                 setIsConnect(() => true);
@@ -47,6 +48,8 @@ export const postLogIn = async ({ name, password, updateConnectedUserName, setIs
                 console.log(data)
                 console.log(data?.msg)
                 if(data?.msg === 'User connected') {
+                    document.cookie = `name=${data?.user_name}; expires=${new Date(2022, 11, 11).toUTCString()}`
+                    console.log(document.cookie)
                     window.USER_ID = data?.user_id;
                     updateConnectedUserName(`Hi, ${data?.user_name}`);
                     setIsConnect(()=>true);

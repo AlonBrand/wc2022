@@ -14,7 +14,7 @@ function Navbar(props) {
     // const [isConnected, setIsConnected] = useState(false);
     const [sidebar, setSideBar] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [userName, setUserName] = useState("");
+    const [userName, setUserName] = useState(props.getUserNameByCookie());
     const [modalTitle, setModalTitle] = useState();
     const [postInProgress, setPostInProgress] = useState(false);
 

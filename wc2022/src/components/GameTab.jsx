@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./GameTab.css";
 import { flagsPaths } from "../constants/games";
+import  Timer  from '../components/Timer/Timer';
 import checkmark from "../images/checmmark.png";
 import ReactCountryFlag from "react-country-flag"
 import { users } from "../constants/users";
@@ -15,6 +16,9 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     const [realScoreA, setRealScoreA] = useState();
     const [realScoreB, setRealScoreB] = useState();
     const [adminCounter, setAdminCounter] = useState(0);
+    const [timerAlert, setTimerAlert] = useState(true);
+    // const isAvailableGame = new Date() - date < 0;
+    // const isAvailableGame = false;
     const [isAvailableGame, setIsAvailableGame] = useState(new Date() < date);
 
     useEffect(() => {
@@ -53,7 +57,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
      
 
     const betOnGame = async () => {
-        let msg = "Server received your bet, good luck!!!"
+        let msg = betRecivedContent()
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -65,15 +69,18 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
+            setModalContent(msg, "Nice bet bro!");
+            setModalOpen(true);
+            setReFetch(prev => !prev);
         } catch (e) {
             msg = "Faild to send bet, please try again"
+            setModalContent(msg, "Nice bet bro!");
+            setModalOpen(true);
         }
         // document.getElementById(`response-placeholder-${id}`).innerText = msg;
 
         // document.getElementById(`response-placeholder-${id}`).display = 'block';
-        setModalContent(betRecivedContent(), "Nice bet bro!");
-        setModalOpen(true);
-        setReFetch(prev => !prev);
+ 
         // setTimeout(() => {
         //     document.getElementById(`response-placeholder-${id}`).innerText = '';
         // }, 4000);
@@ -246,6 +253,27 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
         )
     }
 
+    const gameTimer = () => {
+        
+        if(!isAvailableGame) return;
+        // if(date - new Date() <= 1){
+        //     setTimerAlert(true)
+        // }
+        console.log(timerAlert)
+        return  (
+            
+            <div id={`timerWrapper-${id}`}>
+                Time left:
+                <Timer class={timerAlert ? 'one_min_left' : null }
+                    gameDate={date}
+                    gameTabId={id}
+                    setTimerAlert={setTimerAlert}
+                />
+            </div>
+        )
+
+    }
+
     return (
             <div className="game-tab-container" style={{marginBottom: "30px"}}>       
                 {!isAvailableGame ? 
@@ -283,6 +311,8 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                  <>
                     <div style={{"paddingBottom":"10px"}}>
                         {getFlagIcon()}
+                        <br></br>
+                        {new Date().getDate() === date.getDate() ? gameTimer() : undefined}
                         <br></br>
                         {getDateTime()}
                         <br></br>

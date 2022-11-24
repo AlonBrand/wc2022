@@ -11,6 +11,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     const [realScoreA, setRealScoreA] = useState();
     const [realScoreB, setRealScoreB] = useState();
     const [adminCounter, setAdminCounter] = useState(0);
+    const [timerAlert, setTimerAlert] = useState(true);
     const isAvailableGame = new Date() - date < 0;
     // const isAvailableGame = false;
 
@@ -188,11 +189,20 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     const gameTimer = () => {
         
         if(!isAvailableGame) return;
-
+        // if(date - new Date() <= 1){
+        //     setTimerAlert(true)
+        // }
+        console.log(timerAlert)
         return  (
-            <Timer
-                gameDate={date}
-            />
+            
+            <div id={`timerWrapper-${id}`}>
+                Time left:
+                <Timer class={timerAlert ? 'one_min_left' : null }
+                    gameDate={date}
+                    gameTabId={id}
+                    setTimerAlert={setTimerAlert}
+                />
+            </div>
         )
 
     }
@@ -226,7 +236,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                     <div style={{"paddingBottom":"10px"}}>
                         {getFlagIcon()}
                         <br></br>
-                        {gameTimer()}
+                        {new Date().getDate() === date.getDate() ? gameTimer() : undefined}
                         <br></br>
                         {getDateTime()}
                         <br></br>

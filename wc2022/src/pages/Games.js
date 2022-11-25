@@ -56,9 +56,8 @@ function Games(prop) {
       <>
         {
           Object.values(games)?.map((game, index) => {
-            // console.log(game.date)
-            // console.log(game.date.getDate())
-            if(new Date() > game.date && !showOldGames) return;
+            const curr_data = new Date()
+            if((curr_data > game.date && (curr_data.getDay() > game.date.getDay())) && !showOldGames) return;
             return(
                 <GameTab 
                     key={game.id} 

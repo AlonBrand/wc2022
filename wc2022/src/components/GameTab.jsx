@@ -9,7 +9,7 @@ import { BiBarChart } from "react-icons/bi";
 import { useEffect } from "react";
 
 
-export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, serverScoreA, serverScoreB, serverGameID }) => {
+export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, bets, realGames }) => {
     let interval_id;
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
@@ -17,8 +17,6 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     const [realScoreB, setRealScoreB] = useState();
     const [adminCounter, setAdminCounter] = useState(0);
     const [timerAlert, setTimerAlert] = useState(true);
-    // const isAvailableGame = new Date() - date < 0;
-    // const isAvailableGame = false;
     const [isAvailableGame, setIsAvailableGame] = useState(new Date() < date);
 
     useEffect(() => {
@@ -237,7 +235,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
             // let response = await fetch(`http://127.0.0.1:5000/get-bets/${id}`);
             let response_data = response.json()
             .then((data) => {
-                setModalContent(getGameTable(data?.game_bets),`${teamA} - ${teamB} Bets:`);
+                setModalContent(getGameTable(data?.game_bets),`${teamA} - ${teamB}`);
                 setModalOpen(true);
             })
         } catch (e) {
@@ -245,12 +243,14 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
         }
     }
 
-    const getBetString = (paddingLeft) => {
+    const getBetString = () => {
         return (
-            <div style={{paddingLeft: paddingLeft !== undefined ? `${paddingLeft}px` : ""}}>
+            <div style={{padding: isAvailableGame ? "5px 0px 0px 0px" : "5px 0px 10px 0px"}}>
                 {
-                    Array.isArray(window.BETS) && window.BETS.map((bet) => {
-                        if(bet.id === id) return bet.value
+                    Array.isArray(bets) && bets?.map((bet) => {
+                        if(bet.id === id) {
+                            return bet.value
+                        }
                     })
                 }
             </div>
@@ -280,9 +280,9 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
         return (
             <div style={{fontStyle:"bold"}}>
                 {
-                    Array.isArray(window.GAMES) && window.GAMES.map((game) => {
+                    Array.isArray(realGames) && realGames.map((game, index) => {
                         if(game.id === id && game.scoreA !== undefined && game.scoreB !== undefined) {
-                            return <h3>{game.scoreA} - {game.scoreB}</h3>
+                            return <h3 key={index}>{game.scoreA} - {game.scoreB}</h3>
                         } 
                     })
                 }
@@ -319,9 +319,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                             serverGameID === id && serverScoreA !== undefined && serverScoreB !== undefined ? 
                             `Your current bet: ${serverScoreA} - ${serverScoreB}` : undefined
                         } */}
-                        {
-                            getBetString(35)
-                        }
+                        {getBetString(35)}
                     </div> 
                 :
                  <>

@@ -10,12 +10,14 @@ function Games(prop) {
   const [reFetch, setReFetch] = useState('');
   // const [userBets, setUserBets] = useState();
   const [showOldGames, setShowOldGames] = useState(false);
+  const [bets, setBets] = useState();
+  const [realGames, setRealGames] = useState();
   
   useEffect(() => {
       const getUserBets = () => {
           try{
-                window.BETS = [];
-                window.GAMES = [];
+                const tempBets = [];
+                const tempGames = [];
                 fetch(`https://alon-wc22.herokuapp.com/userBets/${window.USER_ID}`)
                 // fetch(`http://127.0.0.1:5000/userBets/${window.USER_ID}`)
                 .then((response) => response.json()
@@ -23,24 +25,22 @@ function Games(prop) {
                   // const sortedData = data?.userBets?.sort((a, b)=>a[2] - b[2]);
                     for(let bet of data?.userBets) {
                       if(Array.isArray(bet) && bet?.length >= 4) {
-                        const object = Object.assign({id: bet[2], value: `Your current bet: ${bet[3]} - ${bet[4]}`})
-                        window.BETS.push(object);
-                        // const element = document.getElementById(`your-bet-placeholder-${bet[2]}`);
-                        // if (element) {
-                        //   element.innerText = `Your current bet is: ${bet[3]} - ${bet[4]}`;
-                        //   element.display = 'block';
-                        // }
+                        const object = Object.assign({id: bet[2], value: `Current bet: ${bet[3]} - ${bet[4]}`})
+                        tempBets.push(object);
                     }
                   }
+
                   for(let game of data?.games) {
                     if(Array.isArray(game) && game?.length >= 4) {
-                      window.GAMES.push({
+                      tempGames.push({
                         id: game[0],
                         scoreA: game[3],
                         scoreB: game[4],
                       })
                     }
                   }
+                  setBets(tempBets);
+                  setRealGames(tempGames);
               }))
           } catch(e) {
               console.log(e)
@@ -70,9 +70,8 @@ function Games(prop) {
                     setModalContent={setModalContent} 
                     setModalOpen={setOpen}
                     setReFetch={setReFetch}
-                    // serverScoreA={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[index][3] : undefined}
-                    // serverScoreB={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[index][4] : undefined}
-                    // serverGameID={userBets !== undefined && userBets[index] !== undefined && Array.isArray(userBets[index]) && userBets[index]?.length > 4 ? userBets[i][2] : undefined}
+                    bets={bets}
+                    realGames={realGames}
                 />
             )
           })

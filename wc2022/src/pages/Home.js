@@ -47,7 +47,7 @@ function Home() {
                         "textAlign": "center"
                     }}
                 >
-                    <div style={{justifyContent: "center"}}>
+                    <div style={{"justifyContent": "center", "verticalAlign": "center", width: "100px", textAlign: "center"}}>
                         <ReactCountryFlag
                             countryCode={flagsPaths[game?.teamA]}
                             svg
@@ -61,7 +61,7 @@ function Home() {
                     </div>
                         <h3 style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
                     
-                    <div>
+                    <div style={{"justifyContent": "center", "verticalAlign": "center", width: "100px", textAlign: "center"}}>
                     <ReactCountryFlag
                             countryCode={flagsPaths[game?.teamB]}
                             svg

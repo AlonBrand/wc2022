@@ -118,7 +118,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                         "paddingTop": "15px"
                     }}
                 >
-                    <div style={{"justifyContent": "center", "verticalAlign": "center"}}>
+                    <div style={{"justifyContent": "center", "verticalAlign": "center", width: "100px", textAlign: "center"}}>
                         <ReactCountryFlag
                             countryCode={flagsPaths[teamA]}
                             svg
@@ -130,9 +130,9 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                         />
                         <h4 style={{"paddingTop": "5px"}}>{teamA}</h4>
                     </div>
-                        <h3 onClick={increaseAdminCount} style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
+                    <h3 onClick={increaseAdminCount} style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
                     
-                    <div>
+                    <div style={{"justifyContent": "center", "verticalAlign": "center", width: "100px", textAlign: "center"}}>
                     <ReactCountryFlag
                             countryCode={flagsPaths[teamB]}
                             svg
@@ -282,12 +282,29 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                 {
                     Array.isArray(realGames) && realGames.map((game, index) => {
                         if(game.id === id && game.scoreA !== undefined && game.scoreB !== undefined) {
-                            return <h3 key={index}>{game.scoreA} - {game.scoreB}</h3>
+                            const gamePoints = getMatchPoints(game.scoreA, game.scoreB);
+                            return <>
+                                <h3 key={index}>{game.scoreA} - {game.scoreB}</h3>
+                                {gamePoints !== undefined ? <h4>{gamePoints}</h4> : undefined}
+                                
+                            </>
                         } 
                     })
                 }
             </div>
         )
+    }
+
+    const getMatchPoints = (serverScoreA, serverScoreB) => {
+        for(let bet of bets) {
+            if(bet.id === id) {
+                if (serverScoreA === bet.scoreA && serverScoreB === bet.scoreB) return '+ 1 Points';
+                else if (serverScoreA > serverScoreB && bet.scoreA > bet.scoreB) return '+ 1 Point';
+                else if (serverScoreB > serverScoreA && bet.scoreB > bet.scoreA) return '+ 1 Point';
+                else if (serverScoreA == serverScoreB && bet.scoreA == bet.scoreB) return '+ 1 Point';
+                return '+ 0 Points';
+            }
+        }
     }
 
     return (

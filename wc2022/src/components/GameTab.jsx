@@ -63,7 +63,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
         };
         try {
             // let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);
-            let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
+            let response = await fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/games/bet-on-game", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
@@ -92,8 +92,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
             body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: realScoreA, scoreB: realScoreB }),
         };
         try {
-            let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-real-score", requestOptions);
-            // let response = await fetch("https://alon-wc22.herokuapp.com/games/bet-on-game", requestOptions);
+            let response = await fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/games/bet-real-score", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
@@ -231,7 +230,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
 
     const showGameBets = async () => {
         try {
-            let response = await fetch(`https://alon-wc22.herokuapp.com/get-bets/${id}`);
+            let response = await fetch(`https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/get-bets/${id}`);
             // let response = await fetch(`http://127.0.0.1:5000/get-bets/${id}`);
             let response_data = response.json()
             .then((data) => {

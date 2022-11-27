@@ -18,7 +18,7 @@ function Games(prop) {
           try{
                 const tempBets = [];
                 const tempGames = [];
-                fetch(`https://alon-wc22.herokuapp.com/userBets/${window.USER_ID}`)
+                fetch(`https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/userBets/${window.USER_ID}`)
                 // fetch(`http://127.0.0.1:5000/userBets/${window.USER_ID}`)
                 .then((response) => response.json()
                 .then((data) => {

@@ -298,7 +298,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     const getMatchPoints = (serverScoreA, serverScoreB) => {
         for(let bet of bets) {
             if(bet.id === id) {
-                if (serverScoreA === bet.scoreA && serverScoreB === bet.scoreB) return '+ 1 Points';
+                if (serverScoreA === bet.scoreA && serverScoreB === bet.scoreB) return '+ 3 Points';
                 else if (serverScoreA > serverScoreB && bet.scoreA > bet.scoreB) return '+ 1 Point';
                 else if (serverScoreB > serverScoreA && bet.scoreB > bet.scoreA) return '+ 1 Point';
                 else if (serverScoreA == serverScoreB && bet.scoreA == bet.scoreB) return '+ 1 Point';

@@ -56,8 +56,10 @@ function Games(prop) {
       <>
         {
           Object.values(games)?.map((game, index) => {
-            const curr_data = new Date()
-            if((curr_data > game.date && (curr_data.getDay() > game.date.getDay())) && !showOldGames) return;
+            const curr_date = new Date();
+            const diffTime = curr_date - game?.date;
+            // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            if((diffTime > 0 && diffTime > (1000 * 60 * 60 * 15)) && !showOldGames) return;
             return(
                 <GameTab 
                     key={game.id} 

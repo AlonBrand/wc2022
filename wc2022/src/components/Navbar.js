@@ -31,7 +31,7 @@ function Navbar(props) {
 
     const handleSignUp = () => {
         setModalTitle("Sign-up");
-        setModalIsOpen(true);
+        // setModalIsOpen(true);
     };
 
     const handleLogIn = () => {

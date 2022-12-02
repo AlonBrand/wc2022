@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Games from "./pages/Games";
 import Rank from "./pages/Rank";
 import SideBets from "./pages/SideBets";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
     const [open, setOpen] = useState(false);
@@ -16,14 +16,28 @@ function App() {
         setModalTitle(modalTitle);
     }
     const onCloseModal = () => {
-      setOpen(false)
+      setOpen(false);
     }
-    const [isConnected, setIsConnected] = useState(false);
+
+    const getCookieName = () => {
+        if(document.cookie) return JSON.parse(document.cookie?.substring(5));
+    }
+
+    const [isConnected, setIsConnected] = useState();
+
+    useEffect(() => {
+        const cookie_value = getCookieName();
+        if(cookie_value) {
+            setIsConnected(true);
+            window.USER_ID = cookie_value["user_id"];
+        } 
+    }, []);
+    
     return (
         <div className="App">
             <Router>
                 <Modal open={open} onClose={onCloseModal} modalTitle={modalTitle} modalText={modalText} />
-                <Navbar isConnected={isConnected} setIsConnected={setIsConnected}/>
+                <Navbar isConnected={isConnected} setIsConnected={setIsConnected} getCookieName={getCookieName}/>
                 <Switch>
                     <Route path="/" exact component={Home}></Route>
                     <Route path="/games" children={window.USER_ID ? <Games setModalContent={setModalContent} setOpen={setOpen} modalState={open} onCloseModal={onCloseModal}/> : <Home/> }></Route> 

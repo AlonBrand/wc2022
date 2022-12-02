@@ -8,7 +8,7 @@ export const postSignUp = async ({ name, password, updateConnectedUserName, setI
         body: JSON.stringify({ name: name, password: password }),
     };
     try {
-        let response = await fetch("https://alon-wc22.herokuapp.com/sign-up", requestOptions);
+        let response = await fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/sign-up", requestOptions);
         // let response = await fetch("http://127.0.0.1:5000/sign-up", requestOptions);
         response.json()
         .then((data) => {
@@ -19,6 +19,11 @@ export const postSignUp = async ({ name, password, updateConnectedUserName, setI
                 element.innerHTML = '<h5> User name already exist! </h5>';
             }
             else if(data?.msg === 'User Connected'){
+                const cookie_object = {
+                    user_name: data?.user_name,
+                    user_id: data?.user_id
+                }
+                document.cookie = `name=${JSON.stringify(cookie_object)}; expires=${new Date(2022, 11, 11).toUTCString()}`
                 window.USER_ID = data?.user_id;
                 updateConnectedUserName(`Hi, ${data?.user_name}`)
                 setIsConnect(() => true);
@@ -39,7 +44,7 @@ export const postLogIn = async ({ name, password, updateConnectedUserName, setIs
         body: JSON.stringify({ name: name, password: password }),
     };
     try {
-        let response = await fetch("https://alon-wc22.herokuapp.com/log-in", requestOptions);
+        let response = await fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/log-in", requestOptions);
         // let response = await fetch("http://127.0.0.1:5000/log-in", requestOptions);
         response.json()
             .then((data) => {
@@ -47,6 +52,12 @@ export const postLogIn = async ({ name, password, updateConnectedUserName, setIs
                 console.log(data)
                 console.log(data?.msg)
                 if(data?.msg === 'User connected') {
+                    const cookie_object = {
+                        user_name: data?.user_name,
+                        user_id: data?.user_id
+                    }
+                    document.cookie = `name=${JSON.stringify(cookie_object)}; expires=${new Date(2022, 11, 11).toUTCString()}`
+                    console.log(document.cookie)
                     window.USER_ID = data?.user_id;
                     updateConnectedUserName(`Hi, ${data?.user_name}`);
                     setIsConnect(()=>true);

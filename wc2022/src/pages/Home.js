@@ -13,7 +13,7 @@ function Home() {
     const getSideBets = () => {
         try{
             if ((winningTeam === undefined || topScorer === undefined) && window.USER_ID !== undefined) {
-                fetch(`https://alon-wc22.herokuapp.com/get-side-bets/${window.USER_ID}`)
+                fetch(`https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/get-side-bets/${window.USER_ID}`)
                 // fetch(`http://127.0.0.1:5000/get-side-bets/${window.USER_ID}`)
                 .then((response) => response.json()
                 .then((data) => {
@@ -47,7 +47,7 @@ function Home() {
                         "textAlign": "center"
                     }}
                 >
-                    <div style={{justifyContent: "center"}}>
+                    <div style={{"justifyContent": "center", "verticalAlign": "center", width: "100px", textAlign: "center"}}>
                         <ReactCountryFlag
                             countryCode={flagsPaths[game?.teamA]}
                             svg
@@ -61,7 +61,7 @@ function Home() {
                     </div>
                         <h3 style={{"paddingTop":"15px","textAlign":"center"}}>VS</h3>
                     
-                    <div>
+                    <div style={{"justifyContent": "center", "verticalAlign": "center", width: "100px", textAlign: "center"}}>
                     <ReactCountryFlag
                             countryCode={flagsPaths[game?.teamB]}
                             svg

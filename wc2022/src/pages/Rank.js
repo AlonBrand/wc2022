@@ -10,7 +10,7 @@ function Rank() {
         const getUsers = () => {
             try{
                 if (users === undefined) {
-                    fetch("https://alon-wc22.herokuapp.com/users")
+                    fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/users")
                     // fetch("http://127.0.0.1:5000/users")
                     .then((response) => response.json()
                     .then((data) => {

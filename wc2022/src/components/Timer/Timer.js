@@ -18,8 +18,8 @@ export default function Timer({gameDate, gameTabId, setTimerAlert}) {
             // var minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             // var seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
             setCounter(`${timeLeft}`)
-            console.log(moment.duration(new Date(gameDate - now)).minutes())
-            if (moment.duration(new Date(gameDate - now)).minutes() < 1 && !alertIsOn){
+            // console.log(moment.duration(new Date(gameDate - now)).minutes())
+            if (moment.duration(new Date(gameDate - now)).minutes() < 5 && moment.duration(new Date(gameDate - now)).hours() === 0 && !alertIsOn){
                 document.getElementById(`timerWrapper-${gameTabId}`).classList.add("one_min_left");
                 setalertIsOn(true)
                 setTimerAlert(true);
@@ -28,7 +28,7 @@ export default function Timer({gameDate, gameTabId, setTimerAlert}) {
         return(()=>clearInterval(timeInterval));
     });
   return (
-    <div class="timer">
+    <div className="timer">
         {counter}
     </div>
   );

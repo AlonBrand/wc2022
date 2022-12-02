@@ -18,6 +18,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     const [adminCounter, setAdminCounter] = useState(0);
     const [timerAlert, setTimerAlert] = useState(true);
     const [isAvailableGame, setIsAvailableGame] = useState(new Date() < date);
+    const [betInProgress, setBetInProgress] = useState(false);
 
     useEffect(() => {
         return clearInterval(interval_id);
@@ -62,10 +63,12 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
             body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: scoreA, scoreB: scoreB, userId: window.USER_ID }),
         };
         try {
+            setBetInProgress(true);
             // let response = await fetch("http://127.0.0.1:5000/games/bet-on-game", requestOptions);
             let response = await fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/games/bet-on-game", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));
+            setBetInProgress(false);
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
             setModalContent(msg, "Nice bet bro!");
             setModalOpen(true);
@@ -74,6 +77,7 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
             msg = "Faild to send bet, please try again"
             setModalContent(msg, "Nice bet bro!");
             setModalOpen(true);
+            setBetInProgress(false);
         }
         // document.getElementById(`response-placeholder-${id}`).innerText = msg;
 
@@ -357,7 +361,10 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
                                     <input id="right-bet"  style={{height: "30px", textAlign: "center"}} type="number" placeholder={teamB} onChange={(e)=>setScoreB(e.target.value)}></input>
                                 </div>
                                 <br></br>
-                                <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                                {
+                                    betInProgress ? <span>Bet In Progress!</span> :
+                                    <input id="bet-button" className="bet-button" type="submit" value={'Bet'} disabled={validateInput()}></input>
+                                }
                             </form>
                             {
                                 // serverScoreA !== undefined && serverScoreB !== undefined ? 

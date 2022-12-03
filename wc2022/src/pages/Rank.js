@@ -35,7 +35,7 @@ function Rank() {
         <div className="rank">
             <img src={fifaLogo}/>
             <h1 style={{"paddingTop": "20px", "paddingBottom": "20px"}}>Tournament Table</h1>
-            <table className="rank-table">
+            <table className="rank-table" style={{marginBottom: "50px"}}>
                 <thead>
                     <tr>
                         <th>Rank</th>

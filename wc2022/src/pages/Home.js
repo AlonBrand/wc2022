@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { flagsPaths, games } from '../constants/games';
+import { flagsPaths, games, eighthGames } from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
 import ReactCountryFlag from "react-country-flag"
 import "../App.css";
@@ -29,7 +29,7 @@ function Home() {
     getSideBets();
 }, [window.USER_ID]);
 
-  const getHomeContent = () => {
+  const getHomeContent = (games) => {
     return (
       <>
         {
@@ -121,9 +121,8 @@ function Home() {
         </div>
       }
       <h2 className='pageTitle' style={{padding: "20px" }}>Today's Matches</h2>
-      {
-        games && getHomeContent()
-      }
+      {getHomeContent(games)}
+      {getHomeContent(eighthGames)}
       {
         isEmptyDay && <h3 style={{"textAlign": "center"}}>No Matches Today!</h3>
       }

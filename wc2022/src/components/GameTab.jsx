@@ -9,7 +9,7 @@ import { BiBarChart } from "react-icons/bi";
 import { useEffect } from "react";
 
 
-export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, bets, realGames }) => {
+export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModalOpen, setReFetch, bets, realGames, status }) => {
     let interval_id;
     const [scoreA, setScoreA] = useState();
     const [scoreB, setScoreB] = useState();
@@ -93,10 +93,11 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
         const requestOptions = {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: realScoreA, scoreB: realScoreB }),
+            body: JSON.stringify({ gameId: id, teamA: teamA, teamB: teamB, scoreA: realScoreA, scoreB: realScoreB, status: status }),
         };
         try {
             let response = await fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/games/bet-real-score", requestOptions);
+            //  let response = await fetch("http://127.0.0.1:5000/games/bet-real-score", requestOptions);
             let response_data = response.json()
             .then((data) => console.log(data));
             // updateConnectedUserName(`Hi, ${response_data?.msg}`)
@@ -299,12 +300,17 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
     }
 
     const getMatchPoints = (serverScoreA, serverScoreB) => {
+        let bull_points = '+ 3 Points', part_points = '+ 1 Point';
+        if(status === 'Eighth') {
+            bull_points = '+ 4 Points';
+            part_points = '+ 2 Points';
+        }
         for(let bet of bets) {
             if(bet.id === id) {
-                if (serverScoreA === bet.scoreA && serverScoreB === bet.scoreB) return '+ 3 Points';
-                else if (serverScoreA > serverScoreB && bet.scoreA > bet.scoreB) return '+ 1 Point';
-                else if (serverScoreB > serverScoreA && bet.scoreB > bet.scoreA) return '+ 1 Point';
-                else if (serverScoreA == serverScoreB && bet.scoreA == bet.scoreB) return '+ 1 Point';
+                if (serverScoreA === bet.scoreA && serverScoreB === bet.scoreB) return bull_points;
+                else if (serverScoreA > serverScoreB && bet.scoreA > bet.scoreB) return part_points;
+                else if (serverScoreB > serverScoreA && bet.scoreB > bet.scoreA) return part_points;
+                else if (serverScoreA == serverScoreB && bet.scoreA == bet.scoreB) return part_points;
                 return '+ 0 Points';
             }
         }

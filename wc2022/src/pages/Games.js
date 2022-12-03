@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../App.css";
 import { GameTab } from '../components/GameTab';
-import { games } from '../constants/games';
+import { games, eighthGames } from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
 
 
@@ -9,7 +9,8 @@ function Games(prop) {
   const {setModalContent, setOpen, modalState} = prop;
   const [reFetch, setReFetch] = useState('');
   // const [userBets, setUserBets] = useState();
-  const [showOldGames, setShowOldGames] = useState(false);
+  const [showGroupGames, setShowGroupGames] = useState(false);
+  const [showEighthGames, setShowEightGames] = useState(true);
   const [bets, setBets] = useState();
   const [realGames, setRealGames] = useState();
   
@@ -49,17 +50,20 @@ function Games(prop) {
       getUserBets();
   }, [reFetch]);
 
-  const toggleShowOldMatches = () => setShowOldGames((prevShow)=>!prevShow)
+  const toggleShowGroupMatches = () => setShowGroupGames((prevShow)=>!prevShow)
+  const toggleShowEighthFinal = () => setShowEightGames((prevShow)=>!prevShow)
   
-  const getGamesContent = () => {
+  const getGamesContent = (curr_games) => {
     return (
       <>
         {
-          Object.values(games)?.map((game, index) => {
-            const curr_date = new Date();
-            const diffTime = curr_date - game?.date;
+          Object.values(curr_games)?.map((game, index) => {
+            // const curr_date = new Date();
+            // const diffTime = curr_date - game?.date;
+            if(game.status === "FINISHED" && !showGroupGames) return;
+            if(game.status === "Eighth" && !showEighthGames) return;
             // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            if((diffTime > 0 && diffTime > (1000 * 60 * 60 * 15)) && !showOldGames) return;
+            // if((diffTime > 0 && diffTime > (1000 * 60 * 60 * 15)) && !showEighthGames) return;
             return(
                 <GameTab 
                     key={game.id} 
@@ -67,12 +71,13 @@ function Games(prop) {
                     teamA={game.teamA} 
                     teamB={game.teamB} 
                     date={game.date} 
-                    info={game.info} 
+                    info={game.info}
                     setModalContent={setModalContent} 
                     setModalOpen={setOpen}
                     setReFetch={setReFetch}
                     bets={bets}
                     realGames={realGames}
+                    status={game.status}
                 />
             )
           })
@@ -85,14 +90,18 @@ function Games(prop) {
 
     <>
       <div>
-        <img src={fifaLogo}/>
+        <img src={fifaLogo} />
       </div>
-      <h2 className='pageTitle' style={{padding: "20px" }}>Matches</h2>
+      <h2 className='pageTitle' style={{ padding: "20px" }}>Matches</h2>
       <div className='games'>
-      <div className="game-tab-container" style={{marginBottom: "30px", padding: "10px", fontWeight: "bold"}} onClick={toggleShowOldMatches}> 
-        {showOldGames ? 'Hide Old Matches' : 'Reveal Old Matches'}
-      </div> 
-        {games !== undefined && getGamesContent()}
+        <div className="game-tab-container" style={{ marginBottom: "30px", padding: "10px", fontWeight: "bold" }} onClick={toggleShowGroupMatches}>
+          {showGroupGames ? 'Hide Group Matches' : 'Reveal Group Matches'}
+        </div>
+        {getGamesContent(games)}
+        <div className="game-tab-container" style={{ marginBottom: "30px", padding: "10px", fontWeight: "bold" }} onClick={toggleShowEighthFinal}>
+          {showEighthGames ? 'Hide Eighth Final' : 'Reveal Eighth Final'}
+        </div>
+        {getGamesContent(eighthGames)}
       </div>
     </>
   )

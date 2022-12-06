@@ -135,7 +135,7 @@ return (
                     <tr>
                         <th>Name</th>
                         <th>Winning Team</th>
-                        <th>Top Scorrer</th>
+                        <th>Top Scorer</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -14,8 +14,8 @@ useEffect(() => {
     const getSideBets = () => {
         try{
             if (sideBets === undefined) {
-                // fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/users")
-                fetch("http://127.0.0.1:5000/get-side-bets")
+                fetch("https://wc2022-server-k330-main-y62tkictza-wm.a.run.app/get-side-bets")
+                // fetch("http://127.0.0.1:5000/get-side-bets")
                 .then((response) => response.json()
                 .then((data) => {
                     // console.log(data)

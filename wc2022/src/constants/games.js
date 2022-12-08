@@ -643,3 +643,34 @@ export const eighthGames = [
         status: "Eighth"
     },
 ]
+
+export const quarterGames = [
+    {
+        id: 58,
+        teamA: "Croatia",
+        teamB: "Brazil",
+        date: new Date(2022, 11, 9, 17),
+        status: "Quarter"
+    },
+    {
+        id: 59,
+        teamA: "Netherlands",
+        teamB: "Argentina",
+        date: new Date(2022, 11, 9, 21),
+        status: "Quarter"
+    },
+    {
+        id: 60,
+        teamA: "Morocco",
+        teamB: "Portugal",
+        date: new Date(2022, 11, 10, 17),
+        status: "Quarter"
+    },
+    {
+        id: 61,
+        teamA: "England",
+        teamB: "France",
+        date: new Date(2022, 11, 10, 21),
+        status: "Quarter"
+    }  
+]

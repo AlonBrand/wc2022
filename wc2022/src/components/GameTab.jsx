@@ -301,10 +301,15 @@ export const GameTab = ({ id, teamA, teamB, date, info, setModalContent, setModa
 
     const getMatchPoints = (serverScoreA, serverScoreB) => {
         let bull_points = '+ 3 Points', part_points = '+ 1 Point';
-        if(status === 'Eighth') {
+        if(status === 'Eighth' || status === 'Quarter') {
             bull_points = '+ 4 Points';
             part_points = '+ 2 Points';
         }
+        else if (status === 'Semi') {
+            bull_points = '+ 5 Points';
+            part_points = '+ 2 Points';
+        }
+
         for(let bet of bets) {
             if(bet.id === id) {
                 if (serverScoreA === bet.scoreA && serverScoreB === bet.scoreB) return bull_points;

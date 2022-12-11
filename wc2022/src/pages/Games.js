@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../App.css";
 import { GameTab } from '../components/GameTab';
-import { games, eighthGames, quarterGames } from '../constants/games';
+import { games, eighthGames, quarterGames, semiGames} from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
 
 
@@ -11,7 +11,8 @@ function Games(prop) {
   // const [userBets, setUserBets] = useState();
   const [showGroupGames, setShowGroupGames] = useState(false);
   const [showEighthGames, setShowEightGames] = useState(false);
-  const [showQuarterGames, setShowQuarterGames] = useState(true);
+  const [showQuarterGames, setShowQuarterGames] = useState(false);
+  const [showSemiGames, setShowSemiGames] = useState(true);
   const [bets, setBets] = useState();
   const [realGames, setRealGames] = useState();
   
@@ -53,9 +54,8 @@ function Games(prop) {
 
   const toggleShowGroupMatches = () => setShowGroupGames((prevShow)=>!prevShow)
   const toggleShowEighthFinal = () => setShowEightGames((prevShow)=>!prevShow)
-  const toggleShowQuarterFinal = () => {
-    setShowQuarterGames((prevShow)=>!prevShow)
-  }
+  const toggleShowQuarterFinal = () => setShowQuarterGames((prevShow)=>!prevShow);
+  const toggleShowSemiFinal = () => setShowSemiGames((prevShow)=>!prevShow);
   
   const getGamesContent = (curr_games) => {
     return (
@@ -67,6 +67,7 @@ function Games(prop) {
             if(game.status === "FINISHED" && !showGroupGames) return;
             if(game.status === "Eighth" && !showEighthGames) return;
             if(game.status === "Quarter" && !showQuarterGames) return;
+            if(game.status === "Semi" && !showSemiGames) return;
             // const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
             // if((diffTime > 0 && diffTime > (1000 * 60 * 60 * 15)) && !showEighthGames) return;
             return(
@@ -111,6 +112,10 @@ function Games(prop) {
           {showQuarterGames ? 'Hide Quarter Final' : 'Reveal Quarter Final'}
         </div>
         {getGamesContent(quarterGames)}
+        <div className="game-tab-container" style={{ marginBottom: "30px", padding: "10px", fontWeight: "bold" }} onClick={toggleShowSemiFinal}>
+          {showSemiGames ? 'Hide Semi Final' : 'Reveal Semi Final'}
+        </div>
+        {getGamesContent(semiGames)}
       </div>
     </>
   )

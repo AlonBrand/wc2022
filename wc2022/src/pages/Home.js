@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { flagsPaths, games, eighthGames, quarterGames } from '../constants/games';
+import { flagsPaths, games, eighthGames, quarterGames, semiGames } from '../constants/games';
 import fifaLogo from "../images/fifa-logo.svg"
 import ReactCountryFlag from "react-country-flag"
 import "../App.css";
@@ -124,6 +124,7 @@ function Home() {
       {getHomeContent(games)}
       {getHomeContent(eighthGames)}
       {getHomeContent(quarterGames)}
+      {getHomeContent(semiGames)}
       {
         isEmptyDay && <h3 style={{"textAlign": "center"}}>No Matches Today!</h3>
       }

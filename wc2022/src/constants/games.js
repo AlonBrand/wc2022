@@ -674,3 +674,20 @@ export const quarterGames = [
         status: "Quarter"
     }  
 ]
+
+export const semiGames = [
+    {
+        id: 62,
+        teamA: "Argentina",
+        teamB: "Croatia",
+        date: new Date(2022, 11, 13, 21),
+        status: "Semi"
+    },
+    {
+        id: 63,
+        teamA: "France",
+        teamB: "Morocco",
+        date: new Date(2022, 11, 14, 21),
+        status: "Semi"
+    }  
+]
